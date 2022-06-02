@@ -17,15 +17,17 @@ public class CustomersTest {
         getSingleCustomer();
         // updateCustomer();
         // deleteCustomer();
+        isExistCustomer();
     }
+
 
     public static void insertCustomers() throws JDBCException {
         System.out.println("---------- insert customers TEST ---------");
-        Customer customer1 = new Customer("firstName1", "lastName1", "email1", "password1");
-        Customer customer2 = new Customer("firstName2", "lastName2", "email2", "password2");
-        Customer customer3 = new Customer("firstName3", "lastName3", "email3", "password3");
-        Customer customer4 = new Customer("firstName4", "lastName4", "email4", "password4");
-        Customer customer5 = new Customer("firstName5", "lastName5", "email5", "password5");
+        Customer customer1 = new Customer("firstName1", "lastName1", "customer1@email", "password1");
+        Customer customer2 = new Customer("firstName2", "lastName2", "customer2@email", "password2");
+        Customer customer3 = new Customer("firstName3", "lastName3", "customer3@email", "password3");
+        Customer customer4 = new Customer("firstName4", "lastName4", "customer4@email", "password4");
+        Customer customer5 = new Customer("firstName5", "lastName5", "customer5@email", "password5");
         customerDAO.add(customer1);
         customerDAO.add(customer2);
         customerDAO.add(customer3);
@@ -62,5 +64,10 @@ public class CustomersTest {
         customerDAO.delete(id);
         System.out.println("After delete company");
         getAllCustomers();
+    }
+
+    private static void isExistCustomer() throws JDBCException {
+        System.out.println("---------- isExistCustomer TEST ---------");
+        System.out.println(customerDAO.isExist("customer5@email", "password5"));
     }
 }

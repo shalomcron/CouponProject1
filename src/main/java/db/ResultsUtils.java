@@ -52,7 +52,6 @@ public class ResultsUtils {
 
     public static boolean isExistFromRow(Map<String, Object> map) {
         Long res = (Long) map.get("RES");
-        System.out.println("isExistFromRow res" + res);
         return res == 1;
     }
 }

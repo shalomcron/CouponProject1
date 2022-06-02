@@ -23,6 +23,9 @@ public class CustomerDAOImpl implements CustomerDAO {
             "`FIRST_NAME` = ?, `LAST_NAME` = ?, `EMAIL` = ?, `PASSWORD` = ? WHERE (`ID` = ?);";
     private static final String QUERY_DELETE = "DELETE FROM `coupone-bhp-386`.`customers` WHERE (`id` = ?);";
 
+    private static final String QUERY_IS_EXIST = "select exists (SELECT * FROM `coupone-bhp-386`.customers " +
+            "where EMAIL=? AND PASSWORD=?) as RES;";
+
     private CustomerDAOImpl() {
     }
 
@@ -79,6 +82,10 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public boolean isExist(String email, String password) throws JDBCException {
-        return false;
+        boolean res = false;
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, email);
+        params.put(2, password);
+        return ResultsUtils.isExistFromRow(JDBCUtils.executeQueryWithResults(QUERY_IS_EXIST, params).get(0));
     }
 }
