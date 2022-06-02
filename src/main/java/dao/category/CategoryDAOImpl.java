@@ -1,7 +1,6 @@
 package dao.category;
 
 import beans.Category;
-import beans.Company;
 import db.JDBCUtils;
 import db.ResultsUtils;
 import exceptions.JDBCException;

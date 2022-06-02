@@ -1,6 +1,6 @@
 package dao;
 
-import beans.Customer;
+import beans.cliens.Customer;
 import dao.customer.CustomerDAO;
 import dao.customer.CustomerDAOImpl;
 import exceptions.JDBCException;

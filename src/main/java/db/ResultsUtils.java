@@ -1,9 +1,10 @@
 package db;
 
 import beans.*;
+import beans.cliens.Company;
+import beans.cliens.Customer;
 
 import java.sql.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 /**

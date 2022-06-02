@@ -1,6 +1,6 @@
 package dao;
 
-import beans.Company;
+import beans.cliens.Company;
 import dao.company.CompanyDAO;
 import dao.company.CompanyDAOImpl;
 import exceptions.JDBCException;

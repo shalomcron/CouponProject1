@@ -1,4 +1,6 @@
-package beans;
+package beans.cliens;
+
+import beans.Coupon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +11,7 @@ public class Customer {
     private String lastName;
     private String email;
     private String password;
-    private List<Coupon> coupons = new ArrayList<>();
+    private final List<Coupon> coupons = new ArrayList<>();
 
     public Customer(int id, String firstName, String lastName, String email, String password) {
         this(firstName, lastName, email, password);

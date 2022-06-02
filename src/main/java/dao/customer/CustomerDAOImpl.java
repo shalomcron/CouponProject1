@@ -1,6 +1,6 @@
 package dao.customer;
 
-import beans.Customer;
+import beans.cliens.Customer;
 import db.JDBCUtils;
 import db.ResultsUtils;
 import exceptions.JDBCException;
