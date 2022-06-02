@@ -1,7 +1,7 @@
 package dao.coupon;
 
-import beans.Company;
 import beans.Coupon;
+import dao.couponsCustomers.CouponsCustomersDAOImpl;
 import db.JDBCUtils;
 import db.ResultsUtils;
 import exceptions.JDBCException;
@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.Map;
 
 public class CouponDAOImpl implements CouponDAO {
+    private static final CouponDAOImpl instance = new CouponDAOImpl();
+
+    private static final CouponsCustomersDAOImpl couponsCustomersDAO = CouponsCustomersDAOImpl.getInstance();
+
     private static final String QUERY_INSERT = "INSERT INTO `coupone-bhp-386`.`coupons` " +
             "(`ID_COMPANY`, `ID_CATEGORY`, `TITLE`, `DESCRIPTION`, `DATE_START`, `DATE_END`, `AMOUNT`, `PRICE`, `IMAGE`) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -24,7 +28,6 @@ public class CouponDAOImpl implements CouponDAO {
             "`DATE_START` = ?, `DATE_END` = ?, `AMOUNT` = ?, `PRICE` = ?, `IMAGE` = ? WHERE (`ID` = ?);";
     private static final String QUERY_DELETE = "DELETE FROM `coupone-bhp-386`.`coupons` WHERE (`ID` = ?)";
 
-    private static CouponDAOImpl instance = new CouponDAOImpl();
 
     private CouponDAOImpl() {}
 
@@ -86,5 +89,10 @@ public class CouponDAOImpl implements CouponDAO {
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, id);
         JDBCUtils.executeQuery(QUERY_DELETE, params);
+    }
+
+    @Override
+    public void addCouponPurchase(int customerId, int couponId) throws JDBCException {
+        couponsCustomersDAO.addCoupon(customerId, couponId);
     }
 }

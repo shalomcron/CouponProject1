@@ -12,7 +12,7 @@ public class MainTest {
             CustomersTest.test();
             CategoriesTest.test();
             CouponTest.test();
-            CouponsCustomersTest.test();
+            // CouponsCustomersTest.test();
             System.out.println("---------- MainTest END ---------");
         } catch (JDBCException e) {
             System.out.println(e.getMessage());
