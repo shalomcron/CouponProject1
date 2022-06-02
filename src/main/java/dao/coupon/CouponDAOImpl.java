@@ -1,7 +1,6 @@
 package dao.coupon;
 
 import beans.Coupon;
-import dao.couponsCustomers.CouponsCustomersDAOImpl;
 import db.JDBCUtils;
 import db.ResultsUtils;
 import exceptions.JDBCException;
@@ -14,8 +13,6 @@ import java.util.Map;
 public class CouponDAOImpl implements CouponDAO {
     private static final CouponDAOImpl instance = new CouponDAOImpl();
 
-    private static final CouponsCustomersDAOImpl couponsCustomersDAO = CouponsCustomersDAOImpl.getInstance();
-
     private static final String QUERY_INSERT = "INSERT INTO `coupone-bhp-386`.`coupons` " +
             "(`ID_COMPANY`, `ID_CATEGORY`, `TITLE`, `DESCRIPTION`, `DATE_START`, `DATE_END`, `AMOUNT`, `PRICE`, `IMAGE`) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -27,6 +24,11 @@ public class CouponDAOImpl implements CouponDAO {
             "SET `ID_COMPANY` = ?, `ID_CATEGORY` = ?, `TITLE` = ?, `DESCRIPTION` = ?, " +
             "`DATE_START` = ?, `DATE_END` = ?, `AMOUNT` = ?, `PRICE` = ?, `IMAGE` = ? WHERE (`ID` = ?);";
     private static final String QUERY_DELETE = "DELETE FROM `coupone-bhp-386`.`coupons` WHERE (`ID` = ?)";
+
+    private static final String QUERY_ADD_COUPON_PURCHASE = "INSERT INTO `coupone-bhp-386`.`coupons_customers` " +
+            "(`ID_CUSTOMER`, `ID_COUPON`) VALUES (?, ?);";
+    private static final String DELETE_ADD_COUPON_PURCHASE = "DELETE FROM `coupone-bhp-386`.`coupons_customers` " +
+            "WHERE (`ID_CUSTOMER` = ?) and (`ID_COUPON` = ?)";
 
 
     private CouponDAOImpl() {}
@@ -93,6 +95,17 @@ public class CouponDAOImpl implements CouponDAO {
 
     @Override
     public void addCouponPurchase(int customerId, int couponId) throws JDBCException {
-        couponsCustomersDAO.addCoupon(customerId, couponId);
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, customerId);
+        params.put(2, couponId);
+        JDBCUtils.executeQuery(QUERY_ADD_COUPON_PURCHASE, params);
+    }
+
+    @Override
+    public void deleteCouponPurchase(int customerId, int couponId) throws JDBCException {
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, customerId);
+        params.put(2, couponId);
+        JDBCUtils.executeQuery(DELETE_ADD_COUPON_PURCHASE, params);
     }
 }
