@@ -9,6 +9,6 @@ public class AdminFacade extends ClientFacade {
         if (email.equals("admin@admin.com") && password.equals("admin")) {
             return true;
         }
-        throw new LoginException("Not foung Admin for email:" + email + " and password:" + password);
+        throw new LoginException("Not admin found for email:" + email + " and password:" + password);
     }
 }
