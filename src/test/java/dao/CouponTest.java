@@ -1,7 +1,7 @@
 package dao;
 
-import beans.Category;
-import beans.Coupon;
+import beans.coupone.Category;
+import beans.coupone.Coupon;
 import dao.coupon.CouponDAO;
 import dao.coupon.CouponDAOImpl;
 import exceptions.JDBCException;

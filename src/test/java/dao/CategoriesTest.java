@@ -1,6 +1,6 @@
 package dao;
 
-import beans.Category;
+import beans.coupone.Category;
 import dao.category.CategoryDAO;
 import dao.category.CategoryDAOImpl;
 import exceptions.JDBCException;

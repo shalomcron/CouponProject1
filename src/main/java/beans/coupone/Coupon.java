@@ -1,4 +1,4 @@
-package beans;
+package beans.coupone;
 
 import java.sql.Date;
 

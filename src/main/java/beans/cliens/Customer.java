@@ -1,6 +1,6 @@
 package beans.cliens;
 
-import beans.Coupon;
+import beans.coupone.Coupon;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package beans;
+package beans.coupone;
 
 public enum Category {
     Food(1),
@@ -6,7 +6,7 @@ public enum Category {
     Restaurant(3),
     Vacation(4);
 
-    private int id;
+    private final int id;
     Category(int id) {
         this.id = id;
     }

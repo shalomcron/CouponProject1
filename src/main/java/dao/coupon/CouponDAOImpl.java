@@ -1,6 +1,6 @@
 package dao.coupon;
 
-import beans.Coupon;
+import beans.coupone.Coupon;
 import db.JDBCUtils;
 import db.ResultsUtils;
 import exceptions.JDBCException;

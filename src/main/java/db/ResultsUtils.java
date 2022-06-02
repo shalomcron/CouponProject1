@@ -1,8 +1,9 @@
 package db;
 
-import beans.*;
 import beans.cliens.Company;
 import beans.cliens.Customer;
+import beans.coupone.Category;
+import beans.coupone.Coupon;
 
 import java.sql.Date;
 import java.util.Map;
