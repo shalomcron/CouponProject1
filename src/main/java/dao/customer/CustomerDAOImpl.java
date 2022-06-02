@@ -77,4 +77,8 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
 
+    @Override
+    public boolean isExist(String email, String password) throws JDBCException {
+        return false;
+    }
 }
