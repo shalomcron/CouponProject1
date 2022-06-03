@@ -55,7 +55,8 @@ public class CompanyDAOImpl implements CompanyDAO {
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, id);
         List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ONE, params);
-        return ResultsUtils.companyFromRow(rows.get(0));
+        System.out.println("getSingle rows: " + rows);
+        return rows.size() > 0 ? ResultsUtils.companyFromRow(rows.get(0)) : null;
     }
 
     @Override

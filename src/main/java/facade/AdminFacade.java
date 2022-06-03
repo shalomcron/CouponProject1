@@ -1,14 +1,29 @@
 package facade;
 
+import beans.cliens.Company;
+import exceptions.ClientExistException;
+import exceptions.ClientNotExistException;
+import exceptions.JDBCException;
 import exceptions.LoginException;
+import facade.login.ClientType;
 
 public class AdminFacade extends ClientFacade {
     @Override
-    public boolean login(String email, String password) throws LoginException {
-        // TODO: USE CONDOTION
-        if (email.equals("admin@admin.com") && password.equals("admin")) {
-            return true;
+    public boolean login(String email, String password) {
+        return email.equals("admin@admin.com") && password.equals("admin");
+    }
+
+    public void addCompany(Company company) throws JDBCException, ClientExistException {
+        if (companyDAO.isExist(company.getEmail(), company.getPassword())) {
+            throw new ClientExistException(ClientType.Company, company.getEmail(), company.getPassword());
         }
-        throw new LoginException("Not admin found for email:" + email + " and password:" + password);
+        companyDAO.add(company);
+    }
+
+    public void updateCompany(Company companyToUpdate) throws JDBCException, ClientNotExistException {
+        Company existCompany = companyDAO.getSingle(companyToUpdate.getId());
+        if (existCompany == null) {
+            throw new ClientNotExistException(ClientType.Company, companyToUpdate.getId());
+        }
     }
 }

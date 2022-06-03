@@ -9,9 +9,9 @@ import dao.customer.CustomerDAOImpl;
 import exceptions.LoginException;
 
 public abstract class ClientFacade {
-    private static final CustomerDAO customerDAO = CustomerDAOImpl.getInstance();
-    private static final CompanyDAO companyDAO = CompanyDAOImpl.getInstance();
-    private static final CouponDAO couponDAO = CouponDAOImpl.getInstance();
+    protected static final CustomerDAO customerDAO = CustomerDAOImpl.getInstance();
+    protected static final CompanyDAO companyDAO = CompanyDAOImpl.getInstance();
+    protected static final CouponDAO couponDAO = CouponDAOImpl.getInstance();
 
     public abstract boolean login(String email, String password) throws LoginException;
 }
