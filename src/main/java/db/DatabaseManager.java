@@ -22,7 +22,9 @@ public class DatabaseManager {
                     "  `NAME` VARCHAR(45) NOT NULL,\n" +
                     "  `EMAIL` VARCHAR(45) NOT NULL,\n" +
                     "  `PASSWORD` VARCHAR(45) NOT NULL,\n" +
-                    "  PRIMARY KEY (`id`));\n";
+                    "  PRIMARY KEY (`ID`),\n" +
+                    "  UNIQUE INDEX `NAME_UNIQUE` (`NAME` ASC) VISIBLE,\n" +
+                    "  UNIQUE INDEX `EMAIL_UNIQUE` (`EMAIL` ASC) VISIBLE);";
     private static final String QUERY_CREATE_TABLE_CUSTOMERS =
             "CREATE TABLE `coupone-bhp-386`.`customers` (\n" +
                     "  `ID` INT NOT NULL AUTO_INCREMENT,\n" +
