@@ -1,4 +1,4 @@
-package facade.login;
+package facade.clients;
 
 public enum ClientType {
     Admin,

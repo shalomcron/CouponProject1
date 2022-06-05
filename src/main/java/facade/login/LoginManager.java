@@ -1,10 +1,11 @@
 package facade.login;
 
 import exceptions.LoginException;
-import facade.AdminFacade;
-import facade.ClientFacade;
-import facade.CompanyFacade;
-import facade.CustomerFacade;
+import facade.clients.AdminFacade;
+import facade.clients.ClientFacade;
+import facade.clients.CompanyFacade;
+import facade.clients.CustomerFacade;
+import facade.clients.ClientType;
 
 public class LoginManager {
     private static LoginManager instance = null;

@@ -1,6 +1,6 @@
 package exceptions;
 
-import facade.login.ClientType;
+import facade.clients.ClientType;
 
 public class ClientNotExistException extends Exception {
     public ClientNotExistException(ClientType clientType, int id) {

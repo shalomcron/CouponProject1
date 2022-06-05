@@ -1,4 +1,4 @@
-package facade;
+package facade.clients;
 
 import dao.company.CompanyDAO;
 import dao.company.CompanyDAOImpl;

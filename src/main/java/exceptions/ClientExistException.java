@@ -1,6 +1,6 @@
 package exceptions;
 
-import facade.login.ClientType;
+import facade.clients.ClientType;
 
 public class ClientExistException extends Exception {
     public ClientExistException(ClientType clientType, String email, String password) {

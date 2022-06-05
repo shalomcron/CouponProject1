@@ -1,7 +1,7 @@
 import dao.*;
 import db.DatabaseManager;
 import exceptions.JDBCException;
-import facade.AdminTest;
+import facade.FacadeTest;
 
 public class MainTest {
     public static void main(String[] args) {
@@ -15,9 +15,9 @@ public class MainTest {
 
     private static void facadeTest() {
         try {
-            System.out.println("---------- logicTest START ---------");
-            AdminTest.test();
-            System.out.println("---------- logicTest END ---------");
+            System.out.println("---------- facadeTest START ---------");
+            FacadeTest.test();
+            System.out.println("---------- facadeTest END ---------");
         } catch (Exception e) {
             System.out.println("DAOTests Exception: " + e.getMessage());
         }

@@ -1,11 +1,9 @@
-package facade;
+package facade.clients;
 
 import beans.cliens.Company;
 import exceptions.ClientExistException;
 import exceptions.ClientNotExistException;
 import exceptions.JDBCException;
-import exceptions.LoginException;
-import facade.login.ClientType;
 
 public class AdminFacade extends ClientFacade {
     @Override

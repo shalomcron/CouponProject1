@@ -1,6 +1,6 @@
 package exceptions;
 
-import facade.login.ClientType;
+import facade.clients.ClientType;
 
 public class LoginException extends Exception {
 
