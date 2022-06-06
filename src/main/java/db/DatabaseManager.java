@@ -32,7 +32,8 @@ public class DatabaseManager {
                     "  `LAST_NAME` VARCHAR(45) NOT NULL,\n" +
                     "  `EMAIL` VARCHAR(45) NOT NULL,\n" +
                     "  `PASSWORD` VARCHAR(45) NOT NULL,\n" +
-                    "  PRIMARY KEY (`id`));\n";
+                    "  PRIMARY KEY (`ID`),\n" +
+                    "  UNIQUE INDEX `EMAIL_UNIQUE` (`EMAIL` ASC) VISIBLE);\n";
     private static final String QUERY_CREATE_TABLE_CATEGORIES =
             "CREATE TABLE `coupone-bhp-386`.`categories` (\n" +
                     "  `ID` INT NOT NULL AUTO_INCREMENT,\n" +

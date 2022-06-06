@@ -16,7 +16,7 @@ public class MainTest {
     private static void facadeTest() {
         try {
             System.out.println("---------- facadeTest START ---------");
-            FacadeTest.test();
+            FacadeTest.adminTest();
             System.out.println("---------- facadeTest END ---------");
         } catch (Exception e) {
             System.out.println("facadeTest Exception: " + e.getMessage());
