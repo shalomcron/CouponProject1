@@ -6,4 +6,6 @@ import exceptions.JDBCException;
 
 public interface CompanyDAO extends DAO<Company, Integer> {
     boolean isExist(String email, String password) throws JDBCException;
+
+    Company getSingle(String email, String password) throws JDBCException;
 }

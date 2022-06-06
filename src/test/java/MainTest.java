@@ -19,7 +19,7 @@ public class MainTest {
             FacadeTest.test();
             System.out.println("---------- facadeTest END ---------");
         } catch (Exception e) {
-            System.out.println("DAOTests Exception: " + e.getMessage());
+            System.out.println("facadeTest Exception: " + e.getMessage());
         }
     }
 

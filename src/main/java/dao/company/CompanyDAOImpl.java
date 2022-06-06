@@ -17,6 +17,7 @@ public class CompanyDAOImpl implements CompanyDAO {
             "VALUES (?, ?, ?);\n";
     private static final String QUERY_GET_ALL = "SELECT * FROM `coupone-bhp-386`.companies";
     private static final String QUERY_GET_ONE = "SELECT * FROM `coupone-bhp-386`.companies where id=?";
+    private static final String QUERY_GET_ONE_BY_MAIL_PASS = "SELECT * FROM `coupone-bhp-386`.companies where EMAIL=? AND PASSWORD=?";
 
     private static final String QUERY_UPDATE = "UPDATE `coupone-bhp-386`.`companies` SET " +
             "`name` = ?, `email` = ?, `password` = ? WHERE (`id` = ?);";
@@ -55,7 +56,15 @@ public class CompanyDAOImpl implements CompanyDAO {
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, id);
         List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ONE, params);
-        System.out.println("getSingle rows: " + rows);
+        return rows.size() > 0 ? ResultsUtils.companyFromRow(rows.get(0)) : null;
+    }
+
+    @Override
+    public Company getSingle(String email, String password) throws JDBCException {
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, email);
+        params.put(2, password);
+        List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ONE_BY_MAIL_PASS, params);
         return rows.size() > 0 ? ResultsUtils.companyFromRow(rows.get(0)) : null;
     }
 
@@ -84,4 +93,5 @@ public class CompanyDAOImpl implements CompanyDAO {
         params.put(2, password);
         return ResultsUtils.isExistFromRow(JDBCUtils.executeQueryWithResults(QUERY_IS_EXIST, params).get(0));
     }
+
 }

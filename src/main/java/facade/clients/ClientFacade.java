@@ -13,5 +13,5 @@ public abstract class ClientFacade {
     protected static final CompanyDAO companyDAO = CompanyDAOImpl.getInstance();
     protected static final CouponDAO couponDAO = CouponDAOImpl.getInstance();
 
-    public abstract boolean login(String email, String password) throws LoginException;
+    public abstract boolean login(String email, String password);
 }

@@ -19,9 +19,15 @@ public class AdminFacade extends ClientFacade {
     }
 
     public void updateCompany(Company companyToUpdate) throws JDBCException, ClientNotExistException {
-        Company existCompany = companyDAO.getSingle(companyToUpdate.getId());
+        int id = companyToUpdate.getId();
+        Company existCompany = companyDAO.getSingle(id);
         if (existCompany == null) {
             throw new ClientNotExistException(ClientType.Company, companyToUpdate.getId());
         }
+        companyDAO.update(id, companyToUpdate);
+    }
+
+    public Company geSingle(String email, String password) throws JDBCException {
+        return companyDAO.getSingle(email, password);
     }
 }
