@@ -8,9 +8,20 @@ public class MainTest {
         System.out.println("----- Main Tests START -----");
         System.out.println("---------- dropCreateStrategy ---------");
         DatabaseManager.getInstance().dropCreateStrategy();
+        System.out.println("\n");
         DAOTests();
+        System.out.println("\n");
         adminFacadeTest();
+        System.out.println("\n");
+        companyFacadeTest();
+        System.out.println("\n");
         System.out.println("----- Main Tests END -----");
+    }
+
+    private static void companyFacadeTest() {
+        System.out.println("---------- companyFacadeTest START ---------");
+
+        System.out.println("---------- companyFacadeTest END ---------");
     }
 
     private static void adminFacadeTest() {
