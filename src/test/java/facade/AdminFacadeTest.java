@@ -8,11 +8,12 @@ import facade.clients.ClientType;
 import facade.login.LoginManager;
 
 public class AdminFacadeTest {
-    private static AdminFacade adminFacade = null;
     private static final LoginManager loginManager = LoginManager.getInstance();
+    private static AdminFacade adminFacade = null;
     private static Company elalComp = new Company("EL-AL", "elal@gmail.com", "elal_password");
     private static Company zaralComp = new Company("ZARA", "zara@gmail.com", "zara_password");
     private static Company aldoComp = new Company("ALDO", "aldo@gmail.com", "aldo_password");
+    private static Company taraComp = new Company("TARA", "tara@gmail.com", "tara_password");
 
     private static Customer yosef = new Customer("Yosef", "YosefFamily", "yosef@gmail.com", "yosef_password");
     private static Customer david = new Customer("David", "DavidFamily", "david@gmail.com", "david_password");
@@ -36,9 +37,6 @@ public class AdminFacadeTest {
             deleteCustomer();
             getAllCustomers();
             getOneCustomer();
-
-
-
         }
     }
 
@@ -121,6 +119,7 @@ public class AdminFacadeTest {
             elalComp = adminFacade.geSingleCompany(elalComp.getEmail(), elalComp.getPassword());
             zaralComp = adminFacade.geSingleCompany(zaralComp.getEmail(), zaralComp.getPassword());
             aldoComp = adminFacade.geSingleCompany(aldoComp.getEmail(), aldoComp.getPassword());
+            taraComp = adminFacade.geSingleCompany(taraComp.getEmail(), taraComp.getPassword());
             System.out.println("@ getClientsFromDB finished successfully");
         } catch (JDBCException e) {
             System.out.println("addClientIds:" + e);
@@ -154,6 +153,7 @@ public class AdminFacadeTest {
             adminFacade.addCompany(elalComp);
             adminFacade.addCompany(zaralComp);
             adminFacade.addCompany(aldoComp);
+            adminFacade.addCompany(taraComp);
             System.out.println("@ addCompanies finished successfully");
         } catch (Exception e) {
             System.out.println("addCompanies:" + e);

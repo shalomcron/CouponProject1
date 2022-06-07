@@ -14,13 +14,7 @@ public class Coupon {
     private double price;
     private String image;
 
-    public Coupon(int id, int companyId, int categoryId, String title, String description, Date startDate, Date endDate, int amount, double price, String image) {
-        this(companyId, categoryId, title, description, startDate, endDate, amount, price, image);
-        this.id = id;
-    }
-
-    public Coupon(int companyId, int categoryId, String title, String description, Date startDate, Date endDate, int amount, double price, String image) {
-        this.companyId = companyId;
+    public Coupon(String title, int categoryId, String description, Date startDate, Date endDate, int amount, double price, String image) {
         this.categoryId = categoryId;
         this.title = title;
         this.description = description;
@@ -30,6 +24,18 @@ public class Coupon {
         this.price = price;
         this.image = image;
     }
+
+    public Coupon(int companyId, int categoryId, String title, String description, Date startDate, Date endDate, int amount, double price, String image) {
+        this(title, categoryId, description, startDate, endDate, amount, price, image);
+        this.companyId = companyId;
+    }
+
+    public Coupon(int id, int companyId, int categoryId, String title, String description, Date startDate, Date endDate, int amount, double price, String image) {
+        this(companyId, categoryId, title, description, startDate, endDate, amount, price, image);
+        this.id = id;
+    }
+
+
 
     public int getId() {
         return id;

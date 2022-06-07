@@ -1,6 +1,7 @@
 package facade.clients;
 
 import beans.cliens.Company;
+import beans.coupone.Coupon;
 import exceptions.JDBCException;
 
 public class CompanyFacade extends ClientFacade {
@@ -22,5 +23,9 @@ public class CompanyFacade extends ClientFacade {
 
     public int getCompanyId() {
         return companyId;
+    }
+
+    public void addCoupon(Coupon coupon) throws JDBCException {
+        couponDAO.add(coupon);
     }
 }
