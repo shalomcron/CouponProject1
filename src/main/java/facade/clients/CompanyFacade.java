@@ -26,6 +26,7 @@ public class CompanyFacade extends ClientFacade {
     }
 
     public void addCoupon(Coupon coupon) throws JDBCException {
+        coupon.setCompanyId(this.getCompanyId());
         couponDAO.add(coupon);
     }
 }

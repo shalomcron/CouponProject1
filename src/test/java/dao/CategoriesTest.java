@@ -21,7 +21,6 @@ public class CategoriesTest {
         for (Category c: Category.values()) {
             categoryDAO.add(c);
         }
-
     }
 
     public static void getAllCategories() throws JDBCException {

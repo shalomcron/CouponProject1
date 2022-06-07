@@ -11,23 +11,16 @@ public class MainTest {
         DatabaseManager.getInstance().dropCreateStrategy();
         // DAOTests();
         // System.out.println("\n");
-        adminFacadeTest();
-        System.out.println("\n");
-        companyFacadeTest();
-        System.out.println("----- Main Tests END -----");
-    }
-
-    private static void companyFacadeTest() {
-        System.out.println("---------- companyFacadeTest START ---------");
-        CompanyFacadeTest.companyTest();
-        System.out.println("---------- companyFacadeTest END ---------");
-    }
-
-    private static void adminFacadeTest() {
-        System.out.println("---------- adminFacadeTest START ---------");
+        System.out.println("\n ---------- adminFacadeTest START ---------");
         AdminFacadeTest.adminTest();
         System.out.println("---------- adminFacadeTest END ---------");
+        System.out.println("\n ---------- companyFacadeTest START ---------");
+        CompanyFacadeTest.companyTest();
+        System.out.println(" ---------- companyFacadeTest END ---------");
+        System.out.println("\n ----- Main Tests END -----");
     }
+
+
 
     private static void DAOTests() {
         try {

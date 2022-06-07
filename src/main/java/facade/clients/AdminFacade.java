@@ -2,6 +2,7 @@ package facade.clients;
 
 import beans.cliens.Company;
 import beans.cliens.Customer;
+import beans.coupone.Category;
 import exceptions.ClientExistException;
 import exceptions.ClientNotExistException;
 import exceptions.JDBCException;
@@ -9,6 +10,10 @@ import exceptions.JDBCException;
 import java.util.List;
 
 public class AdminFacade extends ClientFacade {
+    public AdminFacade() {
+        this.insertCategories();
+    }
+
     @Override
     public boolean login(String email, String password) {
         return email.equals("admin@admin.com") && password.equals("admin");
@@ -69,4 +74,16 @@ public class AdminFacade extends ClientFacade {
     public Customer geSingleCompany(int id) throws JDBCException {
         return customerDAO.getSingle(id);
     }
+
+    private void insertCategories() {
+        for (Category c: Category.values()) {
+            try {
+                categoryDAO.add(c);
+                System.out.println("@ insertCategories finished successfully");
+            } catch (JDBCException e) {
+                System.out.println("insertCategories ex:" + e);
+            }
+        }
+    }
+
 }
