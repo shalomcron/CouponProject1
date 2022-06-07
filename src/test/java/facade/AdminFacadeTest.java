@@ -7,7 +7,7 @@ import facade.clients.AdminFacade;
 import facade.clients.ClientType;
 import facade.login.LoginManager;
 
-public class FacadeTest {
+public class AdminFacadeTest {
     private static AdminFacade adminFacade = null;
     private static final LoginManager loginManager = LoginManager.getInstance();
     private static Company elalComp = new Company("EL-AL", "elal@gmail.com", "elal_password");

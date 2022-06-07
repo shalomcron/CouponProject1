@@ -1,25 +1,25 @@
 import dao.*;
 import db.DatabaseManager;
 import exceptions.JDBCException;
-import facade.FacadeTest;
+import facade.AdminFacadeTest;
 
 public class MainTest {
     public static void main(String[] args) {
         System.out.println("----- Main Tests START -----");
         System.out.println("---------- dropCreateStrategy ---------");
         DatabaseManager.getInstance().dropCreateStrategy();
-        // DAOTests();
-        facadeTest();
+        DAOTests();
+        adminFacadeTest();
         System.out.println("----- Main Tests END -----");
     }
 
-    private static void facadeTest() {
+    private static void adminFacadeTest() {
         try {
-            System.out.println("---------- facadeTest START ---------");
-            FacadeTest.adminTest();
-            System.out.println("---------- facadeTest END ---------");
+            System.out.println("---------- adminFacadeTest START ---------");
+            AdminFacadeTest.adminTest();
+            System.out.println("---------- adminFacadeTest END ---------");
         } catch (Exception e) {
-            System.out.println("facadeTest Exception: " + e.getMessage());
+            System.out.println("adminFacadeTest Exception: " + e.getMessage());
         }
     }
 
