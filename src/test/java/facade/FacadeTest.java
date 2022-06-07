@@ -23,7 +23,7 @@ public class FacadeTest {
         if (adminFacade != null) {
             // Companies
             addCompanies();
-            addClientIdsFromDB();
+            getClientsFromDB();
             updateCompany();
             deleteCompany();
             getAllCompanies();
@@ -31,6 +31,7 @@ public class FacadeTest {
 
             // Customers
             addCustomers();
+            getCustomersFromDB();
             updateCustomer();
             deleteCustomer();
             getAllCustomers();
@@ -50,6 +51,10 @@ public class FacadeTest {
         } catch (JDBCException e) {
             System.out.println("addCustomers ex:" + e);
         }
+    }
+
+    private static void getCustomersFromDB() {
+
     }
 
     private static void updateCustomer() {
@@ -89,7 +94,7 @@ public class FacadeTest {
         }
     }
 
-    private static void addClientIdsFromDB() {
+    private static void getClientsFromDB() {
         try {
             elalComp = adminFacade.geSingle(elalComp.getEmail(), elalComp.getPassword());
             zaralComp = adminFacade.geSingle(zaralComp.getEmail(), zaralComp.getPassword());

@@ -6,7 +6,6 @@ import dao.coupon.CouponDAO;
 import dao.coupon.CouponDAOImpl;
 import dao.customer.CustomerDAO;
 import dao.customer.CustomerDAOImpl;
-import exceptions.LoginException;
 
 public abstract class ClientFacade {
     protected static final CustomerDAO customerDAO = CustomerDAOImpl.getInstance();
