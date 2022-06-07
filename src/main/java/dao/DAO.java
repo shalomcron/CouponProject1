@@ -1,5 +1,6 @@
 package dao;
 
+import beans.cliens.Company;
 import exceptions.JDBCException;
 
 import java.util.List;
@@ -13,6 +14,4 @@ public interface DAO<T, ID> {
     T getSingle(ID id) throws JDBCException;
     void update(ID id, T t) throws JDBCException;
     void delete(ID id) throws JDBCException;
-
-
 }

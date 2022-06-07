@@ -53,17 +53,39 @@ public class FacadeTest {
         }
     }
 
-    private static void getCustomersFromDB() {
-
-    }
-
     private static void updateCustomer() {
+        yosef.setEmail("changed_yosef@gmail.com");
+        yosef.setPassword("changed_yosef_password");
+        try {
+            adminFacade.updateCustomer(yosef);
+            System.out.println("@ updateCustomer finished successfully");
+        } catch (JDBCException e) {
+            System.out.println("updateCustomer ex:" + e);
+        }
     }
     private static void deleteCustomer() {
+        try {
+            adminFacade.deleteCustomer(shay);
+            System.out.println("@ deleteCustomer finished successfully");
+        } catch (JDBCException e) {
+            System.out.println("deleteCustomer ex:" + e);
+        }
     }
     private static void getAllCustomers() {
+        System.out.println("@ getAllCustomers");
+        try {
+            adminFacade.getAllCustomers().forEach(System.out::println);
+        } catch (JDBCException e) {
+            System.out.println("getAllCustomers ex:" + e);
+        }
     }
     private static void getOneCustomer() {
+        System.out.println("@ getAllCustomers");
+        try {
+            System.out.println(adminFacade.geSingleCompany(david.getId()));
+        } catch (JDBCException e) {
+            System.out.println("getAllCustomers ex:" + e);
+        }
     }
 
 
@@ -72,7 +94,7 @@ public class FacadeTest {
         try {
             System.out.println(adminFacade.getOneCompany(elalComp.getId()));
         } catch (JDBCException e) {
-            System.out.println("getOneCompany:" + e);
+            System.out.println("getOneCompany ex:" + e);
         }
     }
 
@@ -81,7 +103,7 @@ public class FacadeTest {
         try {
             adminFacade.getAllCompanies().forEach(System.out::println);
         } catch (JDBCException e) {
-            System.out.println("getAllCompanies:" + e);
+            System.out.println("getAllCompanies ex:" + e);
         }
     }
 
@@ -96,12 +118,23 @@ public class FacadeTest {
 
     private static void getClientsFromDB() {
         try {
-            elalComp = adminFacade.geSingle(elalComp.getEmail(), elalComp.getPassword());
-            zaralComp = adminFacade.geSingle(zaralComp.getEmail(), zaralComp.getPassword());
-            aldoComp = adminFacade.geSingle(aldoComp.getEmail(), aldoComp.getPassword());
-            System.out.println("@ addClientIdsFromDB finished successfully");
+            elalComp = adminFacade.geSingleCompany(elalComp.getEmail(), elalComp.getPassword());
+            zaralComp = adminFacade.geSingleCompany(zaralComp.getEmail(), zaralComp.getPassword());
+            aldoComp = adminFacade.geSingleCompany(aldoComp.getEmail(), aldoComp.getPassword());
+            System.out.println("@ getClientsFromDB finished successfully");
         } catch (JDBCException e) {
             System.out.println("addClientIds:" + e);
+        }
+    }
+
+    private static void getCustomersFromDB() {
+        try {
+            yosef = adminFacade.geSingleCustomer(yosef.getEmail(), yosef.getPassword());
+            david = adminFacade.geSingleCustomer(david.getEmail(), david.getPassword());
+            shay = adminFacade.geSingleCustomer(shay.getEmail(), shay.getPassword());
+            System.out.println("@ getCustomersFromDB finished successfully");
+        } catch (JDBCException e) {
+            System.out.println("getCustomersFromDB ex:" + e);
         }
     }
 

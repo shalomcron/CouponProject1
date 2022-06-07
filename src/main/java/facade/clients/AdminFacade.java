@@ -30,8 +30,12 @@ public class AdminFacade extends ClientFacade {
         companyDAO.update(id, companyToUpdate);
     }
 
-    public Company geSingle(String email, String password) throws JDBCException {
+    public Company geSingleCompany(String email, String password) throws JDBCException {
         return companyDAO.getSingle(email, password);
+    }
+
+    public Customer geSingleCustomer(String email, String password) throws JDBCException {
+        return customerDAO.getSingle(email, password);
     }
 
     public void deleteCompany(int id) throws JDBCException {
@@ -48,5 +52,21 @@ public class AdminFacade extends ClientFacade {
 
     public void addCustomer(Customer customer) throws JDBCException {
         customerDAO.add(customer);
+    }
+
+    public void updateCustomer(Customer customer) throws JDBCException {
+        customerDAO.update(customer.getId(), customer);
+    }
+
+    public void deleteCustomer(Customer customer) throws JDBCException {
+        customerDAO.delete(customer.getId());
+    }
+
+    public List<Customer> getAllCustomers() throws JDBCException {
+        return customerDAO.getAll();
+    }
+
+    public Customer geSingleCompany(int id) throws JDBCException {
+        return customerDAO.getSingle(id);
     }
 }

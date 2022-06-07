@@ -17,7 +17,8 @@ public class CompanyDAOImpl implements CompanyDAO {
             "VALUES (?, ?, ?);\n";
     private static final String QUERY_GET_ALL = "SELECT * FROM `coupone-bhp-386`.companies";
     private static final String QUERY_GET_ONE = "SELECT * FROM `coupone-bhp-386`.companies where id=?";
-    private static final String QUERY_GET_ONE_BY_MAIL_PASS = "SELECT * FROM `coupone-bhp-386`.companies where EMAIL=? AND PASSWORD=?";
+    private static final String QUERY_GET_ONE_BY_MAIL_PASS =
+            "SELECT * FROM `coupone-bhp-386`.companies where EMAIL=? AND PASSWORD=?";
 
     private static final String QUERY_UPDATE = "UPDATE `coupone-bhp-386`.`companies` SET " +
             "`name` = ?, `email` = ?, `password` = ? WHERE (`id` = ?);";

@@ -18,6 +18,8 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     private static final String QUERY_GET_ALL = "SELECT * FROM `coupone-bhp-386`.customers";
     private static final String QUERY_GET_ONE = "SELECT * FROM `coupone-bhp-386`.customers where id=?";
+    private static final String QUERY_GET_ONE_BY_MAIL_PASS =
+            "SELECT * FROM `coupone-bhp-386`.customers where EMAIL=? AND PASSWORD=?";
 
     private static final String QUERY_UPDATE = "UPDATE `coupone-bhp-386`.`customers` SET " +
             "`FIRST_NAME` = ?, `LAST_NAME` = ?, `EMAIL` = ?, `PASSWORD` = ? WHERE (`ID` = ?);";
@@ -61,6 +63,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         return ResultsUtils.customerFromRow(rows.get(0));
     }
 
+
     @Override
     public void update(Integer id, Customer customer) throws JDBCException {
         Map<Integer, Object> params = new HashMap<>();
@@ -79,7 +82,6 @@ public class CustomerDAOImpl implements CustomerDAO {
         JDBCUtils.executeQuery(QUERY_DELETE, params);
     }
 
-
     @Override
     public boolean isExist(String email, String password) throws JDBCException {
         boolean res = false;
@@ -87,5 +89,14 @@ public class CustomerDAOImpl implements CustomerDAO {
         params.put(1, email);
         params.put(2, password);
         return ResultsUtils.isExistFromRow(JDBCUtils.executeQueryWithResults(QUERY_IS_EXIST, params).get(0));
+    }
+
+    @Override
+    public Customer getSingle(String email, String password) throws JDBCException {
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, email);
+        params.put(2, password);
+        List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ONE_BY_MAIL_PASS, params);
+        return rows.size() > 0 ? ResultsUtils.customerFromRow(rows.get(0)) : null;
     }
 }
