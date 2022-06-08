@@ -7,6 +7,7 @@ import exceptions.JDBCException;
 import facade.clients.ClientType;
 import facade.clients.CompanyFacade;
 import facade.login.LoginManager;
+import facade.store.CouponsStore;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -17,15 +18,6 @@ public class CompanyFacadeTest {
     private static final CompanyFacade companyFacade = (CompanyFacade) loginManager.login(taraComp.getEmail(), taraComp.getPassword(), ClientType.Company);
 
     // Coupons
-    private static Coupon cheeseCoupon =
-            new Coupon("גבינות", Category.Food.getId(), "קופון 20% הנחה על גבינות השמנת",
-                    Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 0, 10, "image");
-    private static Coupon miilkCoupon =
-            new Coupon("חלב", Category.Food.getId(), "קופון 10% הנחה על חלב",
-                    Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 0, 10, "image");
-    private static Coupon yogurtCoupon =
-            new Coupon("יודורט", Category.Food.getId(), "קופון 5% הנחה על יודורט",
-                    Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 0, 10, "image");
 
     public static void companyTest() {
         if (companyFacade != null) {
@@ -36,9 +28,9 @@ public class CompanyFacadeTest {
 
     private static void addCoupon() {
         try {
-            companyFacade.addCoupon(cheeseCoupon);
-            companyFacade.addCoupon(miilkCoupon);
-            companyFacade.addCoupon(yogurtCoupon);
+            companyFacade.addCoupon(CouponsStore.getCheeseCoupon());
+            companyFacade.addCoupon(CouponsStore.getMiilkCoupon());
+            companyFacade.addCoupon(CouponsStore.getYogurtCoupon());
             System.out.println("@ addCoupon finished successfully");
         } catch (JDBCException e) {
             System.out.println("addCoupon ex:" + e);

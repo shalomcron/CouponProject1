@@ -35,6 +35,10 @@ public class Coupon {
         this.id = id;
     }
 
+    public Coupon(Coupon coupon) {
+        this(coupon.getTitle(), coupon.getCategoryId(), coupon.getDescription(), coupon.getStartDate(),
+                coupon.getEndDate(), coupon.getAmount(), coupon.getPrice(), coupon.getImage());
+    }
 
 
     public int getId() {
