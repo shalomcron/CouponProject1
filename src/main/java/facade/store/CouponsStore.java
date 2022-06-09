@@ -11,6 +11,9 @@ public class CouponsStore {
     private static final Coupon cheeseCoupon =
             new Coupon("גבינות", Category.Food.getId(), "קופון 20% הנחה על גבינות השמנת",
                     Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), 0, 10, "image");
+    private static final Coupon cheeseCouponSameTitle =
+            new Coupon("גבינות", Category.Food.getId(), "cheeseCouponSameTitle",
+                    Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), 0, 10, "image");
     private static final Coupon miilkCoupon =
             new Coupon("חלב", Category.Food.getId(), "קופון 10% הנחה על חלב",
                     Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 0, 10, "image");
@@ -23,6 +26,11 @@ public class CouponsStore {
         return new Coupon(cheeseCoupon);
     }
 
+    public static Coupon getCheeseCouponSameTitle() {
+        // clone
+        return new Coupon(cheeseCouponSameTitle);
+    }
+
     public static Coupon getMiilkCoupon() {
         // clone
         return new Coupon(miilkCoupon);
@@ -32,4 +40,5 @@ public class CouponsStore {
         // clone
         return new Coupon(yogurtCoupon);
     }
+
 }

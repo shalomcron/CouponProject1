@@ -33,6 +33,8 @@ public class CompanyFacadeTest {
             companyFacade.addCoupon(CouponsStore.getMiilkCoupon());
             companyFacade.addCoupon(CouponsStore.getYogurtCoupon());
             System.out.println("@ addCoupon finished successfully");
+            // add coupon same title not allowed
+            companyFacade.addCoupon(CouponsStore.getCheeseCouponSameTitle());
         } catch (JDBCException e) {
             System.out.println("addCoupon ex:" + e);
         }

@@ -52,8 +52,9 @@ public class DatabaseManager {
                     "  `PRICE` DOUBLE NOT NULL,\n" +
                     "  `IMAGE` VARCHAR(45) NOT NULL,\n" +
                     "  PRIMARY KEY (`ID`),\n" +
-                    "  INDEX `ID_COMPANY_idx` (`ID_COMPANY` ASC) VISIBLE,\n" +
                     "  INDEX `ID_CATEGORY_idx` (`ID_CATEGORY` ASC) VISIBLE,\n" +
+                    "  INDEX `ID_COMPANY_idx` (`ID_COMPANY` ASC) VISIBLE,\n" +
+                    "  UNIQUE INDEX `TTLE_COMPANY` (`ID_COMPANY` ASC, `TITLE` ASC) VISIBLE,\n" +
                     "  CONSTRAINT `ID_COMPANY`\n" +
                     "    FOREIGN KEY (`ID_COMPANY`)\n" +
                     "    REFERENCES `coupone-bhp-386`.`companies` (`ID`)\n" +
@@ -63,7 +64,8 @@ public class DatabaseManager {
                     "    FOREIGN KEY (`ID_CATEGORY`)\n" +
                     "    REFERENCES `coupone-bhp-386`.`categories` (`ID`)\n" +
                     "    ON DELETE NO ACTION\n" +
-                    "    ON UPDATE NO ACTION);\n";
+                    "    ON UPDATE NO ACTION)\n" +
+                    "COMMENT = '\t\t\t\t\t\t';\n";
 
     private static final String QUERY_CREATE_TABLE_COUPONS_CUSTOMERS = "CREATE TABLE `coupone-bhp-386`.`coupons_customers` (\n" +
             "  `ID_CUSTOMER` INT NOT NULL,\n" +
