@@ -7,6 +7,7 @@ import exceptions.JDBCException;
 import facade.clients.ClientType;
 import facade.clients.CompanyFacade;
 import facade.login.LoginManager;
+import facade.store.CompanyStore;
 import facade.store.CouponsStore;
 
 import java.sql.Date;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 
 public class CompanyFacadeTest {
     private static final LoginManager loginManager = LoginManager.getInstance();
-    private static final Company taraComp = new Company("TARA", "tara@gmail.com", "tara_password");
+    private static final Company taraComp = CompanyStore.getTaraComp();
     private static final CompanyFacade companyFacade = (CompanyFacade) loginManager.login(taraComp.getEmail(), taraComp.getPassword(), ClientType.Company);
 
     // Coupons
@@ -22,11 +23,11 @@ public class CompanyFacadeTest {
     public static void companyTest() {
         if (companyFacade != null) {
             System.out.println("@ Company " + taraComp.getName() + " has logged in");
-            addCoupon();
+            addCoupons();
         }
     }
 
-    private static void addCoupon() {
+    private static void addCoupons() {
         try {
             companyFacade.addCoupon(CouponsStore.getCheeseCoupon());
             companyFacade.addCoupon(CouponsStore.getMiilkCoupon());
