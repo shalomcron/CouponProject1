@@ -3,7 +3,6 @@ package facade;
 import beans.cliens.Company;
 import beans.coupone.Category;
 import beans.coupone.Coupon;
-import exceptions.JDBCException;
 import facade.clients.ClientType;
 import facade.clients.CompanyFacade;
 import facade.login.LoginManager;
@@ -27,15 +26,25 @@ public class CompanyFacadeTest {
             deleteCoupon();
             getAllCoupons();
             getAllCategoryCoupons();
+            getAllMaxPriceCoupons();
+        }
+    }
+
+    private static void getAllMaxPriceCoupons() {
+        try {
+            System.out.println("@ getAllMaxPriceCoupons");
+            companyFacade.getAllCoupons(50).forEach(System.out::println);
+        } catch (Exception e) {
+            System.out.println("getAllMaxPriceCoupons ex:" + e);
         }
     }
 
     private static void getAllCategoryCoupons() {
         try {
             System.out.println("@ getAllCategoryCoupons");
-            companyFacade.getAllCategoryCoupons(Category.Restaurant).forEach(System.out::println);
+            companyFacade.getAllCoupons(Category.Restaurant).forEach(System.out::println);
         } catch (Exception e) {
-            System.out.println("getAllCoupons ex:" + e);
+            System.out.println("getAllCategoryCoupons ex:" + e);
         }
     }
 

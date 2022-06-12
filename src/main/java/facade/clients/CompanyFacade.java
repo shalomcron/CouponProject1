@@ -57,7 +57,11 @@ public class CompanyFacade extends ClientFacade {
         return couponDAO.getAllCompanyCoupons(this.getCompanyId());
     }
 
-    public List<Coupon> getAllCategoryCoupons(Category category) throws JDBCException {
-        return couponDAO.getAllCategoryCoupons(this.getCompanyId(), category.getId());
+    public List<Coupon> getAllCoupons(Category category) throws JDBCException {
+        return couponDAO.getAllCompanyCoupons(this.getCompanyId(), category.getId());
+    }
+
+    public List<Coupon> getAllCoupons(double maxPrice) throws JDBCException {
+        return couponDAO.getAllCompanyCoupons(this.getCompanyId(), maxPrice);
     }
 }
