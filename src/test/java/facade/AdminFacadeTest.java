@@ -25,18 +25,18 @@ public class AdminFacadeTest {
             // add id company to company objects
             getClientsFromDB();
             updateCompany();
-//            deleteCompany();
-//            getAllCompanies();
-//            getOneCompany();
-//
-//            // Customers
-//            addCustomers();
-//            // add id company to customers objects
-//            getCustomersFromDB();
-//            updateCustomer();
-//            deleteCustomer();
-//            getAllCustomers();
-//            getOneCustomer();
+            deleteCompany();
+            getAllCompanies();
+            getOneCompany();
+
+            // Customers
+            addCustomers();
+            // add id company to customers objects
+            getCustomersFromDB();
+            updateCustomer();
+            deleteCustomer();
+            getAllCustomers();
+            getOneCustomer();
         }
     }
 
@@ -46,7 +46,8 @@ public class AdminFacadeTest {
             adminFacade.addCustomer(CustomerStore.getDavid());
             adminFacade.addCustomer(testCustomer);
             System.out.println("@ addCustomers finished successfully");
-        } catch (JDBCException e) {
+            adminFacade.addCustomer(CustomerStore.getEmailLikeDavid());
+        } catch (Exception e) {
             System.out.println("addCustomers ex:" + e);
         }
     }
@@ -56,9 +57,11 @@ public class AdminFacadeTest {
         yosef.setEmail("changed_yosef@gmail.com");
         yosef.setPassword("changed_yosef_password");
         try {
-            adminFacade.updateCustomer(yosef);
+            adminFacade.updateCustomer(yosef.getId(), yosef);
             System.out.println("@ updateCustomer finished successfully");
-        } catch (JDBCException e) {
+            System.out.println("@ trying to update id");
+            adminFacade.updateCustomer(2, yosef);
+        } catch (Exception e) {
             System.out.println("updateCustomer ex:" + e);
         }
     }
@@ -111,7 +114,7 @@ public class AdminFacadeTest {
             adminFacade.deleteCompany(testComp.getId());
             System.out.println("@ deleteCompany " + testComp.getName() + " finished successfully");
         } catch (JDBCException e) {
-            System.out.println("deleteCompany:" + e);
+            System.out.println("deleteCompany ex:" + e);
         }
     }
 
@@ -126,7 +129,7 @@ public class AdminFacadeTest {
             CompanyStore.setTaraComp(adminFacade.geSingleCompany(taraComp.getEmail(), taraComp.getPassword()));
             System.out.println("@ getClientsFromDB finished successfully");
         } catch (JDBCException e) {
-            System.out.println("addClientIds:" + e);
+            System.out.println("addClientIds ex:" + e);
         }
     }
 
@@ -150,10 +153,10 @@ public class AdminFacadeTest {
             elalComp.setPassword("elal_changed_password");
             adminFacade.updateCompany(elalComp.getId(), elalComp);
             System.out.println("@ updateCompany finished successfully");
-            // trying to update id
-            adminFacade.updateCompany(11, elalComp);
+            // trying to update id or name
+            adminFacade.updateCompany(4, elalComp);
         } catch (Exception e) {
-            System.out.println("updateCompany Exception:" + e);
+            System.out.println("updateCompany ex:" + e);
         }
     }
 
@@ -170,7 +173,7 @@ public class AdminFacadeTest {
             // add same company name
             adminFacade.addCompany(testComp);
         } catch (Exception e) {
-            System.out.println("addCompanies:" + e);
+            System.out.println("addCompanies ex:" + e);
         }
     }
 

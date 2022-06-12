@@ -9,4 +9,5 @@ public interface CustomerDAO extends DAO<Customer, Integer> {
 
    Customer getSingle(String email, String password) throws JDBCException;
 
+    boolean isExistByEmail(String email) throws JDBCException;
 }

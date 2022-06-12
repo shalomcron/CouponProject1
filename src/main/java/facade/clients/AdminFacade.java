@@ -2,9 +2,7 @@ package facade.clients;
 
 import beans.cliens.Company;
 import beans.cliens.Customer;
-import exceptions.CompanyException;
-import exceptions.CompanyMsg;
-import exceptions.JDBCException;
+import exceptions.*;
 
 import java.util.List;
 
@@ -25,9 +23,15 @@ public class AdminFacade extends ClientFacade {
     }
 
     public void updateCompany(int id, Company companyToUpdate) throws JDBCException, CompanyException {
-        Company existCompany = companyDAO.getSingle(id);
-        if (existCompany == null) {
+        Company companyDromDB = companyDAO.getSingle(id);
+        if (companyDromDB == null) {
             throw new CompanyException(CompanyMsg.COMPANY_NOT_EXIST);
+        }
+        if (!companyDromDB.getName().equals(companyToUpdate.getName())) {
+            throw new CompanyException(CompanyMsg.COMPANY_NAME_CANNOT_BE_UPDATED);
+        }
+        if (id != companyToUpdate.getId()) {
+            throw new CompanyException(CompanyMsg.COMPANY_ID_CANNOT_BE_UPDATED);
         }
         companyDAO.update(id, companyToUpdate);
     }
@@ -41,6 +45,8 @@ public class AdminFacade extends ClientFacade {
     }
 
     public void deleteCompany(int id) throws JDBCException {
+        // TODO: delete company coupon
+        // TODO: delete customers coupon
         companyDAO.delete(id);
     }
 
@@ -52,15 +58,23 @@ public class AdminFacade extends ClientFacade {
         return companyDAO.getSingle(id);
     }
 
-    public void addCustomer(Customer customer) throws JDBCException {
+    public void addCustomer(Customer customer) throws JDBCException, CustomerException {
+        if (customerDAO.isExistByEmail(customer.getEmail())) {
+            throw new CustomerException(CustomerMsg.CUSTOMER_EMAIL_EXIST);
+        }
         customerDAO.add(customer);
     }
 
-    public void updateCustomer(Customer customer) throws JDBCException {
-        customerDAO.update(customer.getId(), customer);
+    public void updateCustomer(int id, Customer customerToUpdate) throws JDBCException, CustomerException {
+        Customer customerFromDB = customerDAO.getSingle(id);
+        if (customerFromDB.getId() != customerToUpdate.getId()) {
+            throw new CustomerException(CustomerMsg.CUSTOMER_ID_ALREADY_EXIST);
+        }
+        customerDAO.update(id, customerToUpdate);
     }
 
     public void deleteCustomer(Customer customer) throws JDBCException {
+        // TODO: DELETE CUSTOMER COUPONS
         customerDAO.delete(customer.getId());
     }
 

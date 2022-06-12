@@ -27,6 +27,8 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     private static final String QUERY_IS_EXIST = "select exists (SELECT * FROM `coupone-bhp-386`.customers " +
             "where EMAIL=? AND PASSWORD=?) as RES;";
+    private static final String QUERY_IS_EXIST_BY_EMAIL = "select exists (SELECT * FROM `coupone-bhp-386`.customers " +
+            "where EMAIL=?) as RES;";
 
     private CustomerDAOImpl() {
     }
@@ -84,11 +86,17 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public boolean isExist(String email, String password) throws JDBCException {
-        boolean res = false;
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, email);
         params.put(2, password);
         return ResultsUtils.isExistFromRow(JDBCUtils.executeQueryWithResults(QUERY_IS_EXIST, params).get(0));
+    }
+
+    @Override
+    public boolean isExistByEmail(String email) throws JDBCException {
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, email);
+        return ResultsUtils.isExistFromRow(JDBCUtils.executeQueryWithResults(QUERY_IS_EXIST_BY_EMAIL, params).get(0));
     }
 
     @Override
@@ -99,4 +107,5 @@ public class CustomerDAOImpl implements CustomerDAO {
         List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ONE_BY_MAIL_PASS, params);
         return rows.size() > 0 ? ResultsUtils.customerFromRow(rows.get(0)) : null;
     }
+
 }
