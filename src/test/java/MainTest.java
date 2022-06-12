@@ -3,6 +3,7 @@ import db.DatabaseManager;
 import exceptions.JDBCException;
 import facade.AdminFacadeTest;
 import facade.CompanyFacadeTest;
+import facade.CustomerFacadeTest;
 
 public class MainTest {
     public static void main(String[] args) {
@@ -17,6 +18,9 @@ public class MainTest {
         System.out.println("\n ---------- companyFacadeTest START ---------");
         CompanyFacadeTest.companyTest();
         System.out.println(" ---------- companyFacadeTest END ---------");
+        System.out.println("\n ---------- customerFacadeTest START ---------");
+        CustomerFacadeTest.customerTest();
+        System.out.println(" ---------- customerFacadeTest END ---------");
         System.out.println("\n ----- Main Tests END -----");
     }
 
