@@ -27,6 +27,16 @@ public class CompanyFacadeTest {
             getAllCoupons();
             getAllCategoryCoupons();
             getAllMaxPriceCoupons();
+            getCompanyDetails();
+        }
+    }
+
+    private static void getCompanyDetails() {
+        try {
+            System.out.println("@ getCompanyDetails");
+            System.out.println(companyFacade.getCompanyDetails());
+        } catch (Exception e) {
+            System.out.println("getCompanyDetails ex:" + e);
         }
     }
 

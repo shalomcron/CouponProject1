@@ -64,4 +64,8 @@ public class CompanyFacade extends ClientFacade {
     public List<Coupon> getAllCoupons(double maxPrice) throws JDBCException {
         return couponDAO.getAllCompanyCoupons(this.getCompanyId(), maxPrice);
     }
+
+    public Company getCompanyDetails() throws JDBCException {
+        return companyDAO.getSingle(this.companyId);
+    }
 }
