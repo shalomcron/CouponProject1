@@ -52,6 +52,8 @@ public class CompanyFacadeTest {
             companyFacade.addCoupon(getCheeseCoupon(0, 0));
             companyFacade.addCoupon(getMiilkCoupon());
             companyFacade.addCoupon(getYogurtCoupon());
+            companyFacade.addCoupon(getTripCoupone());
+            companyFacade.addCoupon(getRestaurantCoupone());
             System.out.println("@ addCoupon finished successfully");
             System.out.println("@ add coupon same title not allowed");
             companyFacade.addCoupon(getCheeseCoupon(2, 2));
@@ -85,7 +87,7 @@ public class CompanyFacadeTest {
     }
 
     private static Coupon getYogurtCoupon() {
-        return new Coupon("יודורט", Category.Food.getId(), "קופון 5% הנחה על יודורט",
+        return new Coupon("יוגורט", Category.Food.getId(), "קופון 5% הנחה על יודורט",
                 Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 0, 10, "image");
     }
 
@@ -94,4 +96,13 @@ public class CompanyFacadeTest {
                 Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 0, 10, "image");
     }
 
+    private static Coupon getTripCoupone() {
+        return new Coupon("טיול", Category.Vacation.getId(), "קופון 10% לטיול באירופה",
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 0, 10, "image");
+    }
+
+    private static Coupon getRestaurantCoupone() {
+        return new Coupon("מסעדה", Category.Restaurant.getId(), "קופון 10% למסעדה",
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 0, 10, "image");
+    }
 }

@@ -18,7 +18,8 @@ public class CouponDAOImpl implements CouponDAO {
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String QUERY_GET_ALL = "SELECT * FROM `coupone-bhp-386`.coupons";
-    private static final String QUERY_GET_ALL_COMPANY_COUPONS = "SELECT * FROM `coupone-bhp-386`.coupons WHERE (ID_COMPANY = ?)";
+    private static final String QUERY_GET_ALL_COMPANY_COUPONS = "SELECT * FROM `coupone-bhp-386`.coupons " +
+            "WHERE (ID_COMPANY = ?) ORDER BY ID";
     private static final String QUERY_GET_ONE = "SELECT * FROM `coupone-bhp-386`.coupons WHERE id=?";
 
     private static final String QUERY_UPDATE = "UPDATE `coupone-bhp-386`.`coupons` " +
