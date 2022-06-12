@@ -1,5 +1,6 @@
 package dao.coupon;
 
+import beans.coupone.Category;
 import beans.coupone.Coupon;
 import db.JDBCUtils;
 import db.ResultsUtils;
@@ -18,8 +19,10 @@ public class CouponDAOImpl implements CouponDAO {
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String QUERY_GET_ALL = "SELECT * FROM `coupone-bhp-386`.coupons";
-    private static final String QUERY_GET_ALL_COMPANY_COUPONS = "SELECT * FROM `coupone-bhp-386`.coupons " +
+    private static final String QUERY_GET_COMPANY_COUPONS = "SELECT * FROM `coupone-bhp-386`.coupons " +
             "WHERE (ID_COMPANY = ?) ORDER BY ID";
+    private static final String QUERY_GET_COMPANY_COUPONS_CATEGORY = "SELECT * FROM `coupone-bhp-386`.coupons " +
+            "WHERE (ID_COMPANY = ? AND ID_CATEGORY=?) ORDER BY ID";
     private static final String QUERY_GET_ONE = "SELECT * FROM `coupone-bhp-386`.coupons WHERE id=?";
 
     private static final String QUERY_UPDATE = "UPDATE `coupone-bhp-386`.`coupons` " +
@@ -72,7 +75,20 @@ public class CouponDAOImpl implements CouponDAO {
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, companyId);
         List<Coupon> results = new ArrayList<>();
-        List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ALL_COMPANY_COUPONS, params);
+        List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_COMPANY_COUPONS, params);
+        for (Map<String, Object> object : rows) {
+            results.add(ResultsUtils.couponFromRow(object));
+        }
+        return results;
+    }
+
+    @Override
+    public List<Coupon> getAllCategoryCoupons(int companyId, int categoryId) throws JDBCException {
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, companyId);
+        params.put(2, categoryId);
+        List<Coupon> results = new ArrayList<>();
+        List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_COMPANY_COUPONS_CATEGORY, params);
         for (Map<String, Object> object : rows) {
             results.add(ResultsUtils.couponFromRow(object));
         }

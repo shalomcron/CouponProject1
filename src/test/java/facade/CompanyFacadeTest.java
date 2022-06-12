@@ -26,6 +26,16 @@ public class CompanyFacadeTest {
             updateCoupon();
             deleteCoupon();
             getAllCoupons();
+            getAllCategoryCoupons();
+        }
+    }
+
+    private static void getAllCategoryCoupons() {
+        try {
+            System.out.println("@ getAllCategoryCoupons");
+            companyFacade.getAllCategoryCoupons(Category.Restaurant).forEach(System.out::println);
+        } catch (Exception e) {
+            System.out.println("getAllCoupons ex:" + e);
         }
     }
 

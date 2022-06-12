@@ -1,6 +1,7 @@
 package facade.clients;
 
 import beans.cliens.Company;
+import beans.coupone.Category;
 import beans.coupone.Coupon;
 import exceptions.CouponException;
 import exceptions.CouponMsg;
@@ -54,5 +55,9 @@ public class CompanyFacade extends ClientFacade {
 
     public List<Coupon> getAllCoupons() throws JDBCException {
         return couponDAO.getAllCompanyCoupons(this.getCompanyId());
+    }
+
+    public List<Coupon> getAllCategoryCoupons(Category category) throws JDBCException {
+        return couponDAO.getAllCategoryCoupons(this.getCompanyId(), category.getId());
     }
 }

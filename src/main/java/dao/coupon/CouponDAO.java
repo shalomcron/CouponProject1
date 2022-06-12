@@ -1,5 +1,6 @@
 package dao.coupon;
 
+import beans.coupone.Category;
 import beans.coupone.Coupon;
 import dao.DAO;
 import exceptions.JDBCException;
@@ -12,4 +13,6 @@ public interface CouponDAO extends DAO<Coupon, Integer> {
     boolean isExistByTitle(int companyId, String title) throws JDBCException;
 
     List<Coupon> getAllCompanyCoupons(int companyId) throws JDBCException;
+
+    List<Coupon> getAllCategoryCoupons(int companyId, int categoryId) throws JDBCException;
 }
