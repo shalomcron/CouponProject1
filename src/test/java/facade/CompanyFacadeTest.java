@@ -8,7 +8,11 @@ import facade.clients.ClientType;
 import facade.clients.CompanyFacade;
 import facade.login.LoginManager;
 import facade.store.CompanyStore;
-import facade.store.CouponsStore;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 
 public class CompanyFacadeTest {
     private static final LoginManager loginManager = LoginManager.getInstance();
@@ -20,25 +24,74 @@ public class CompanyFacadeTest {
             System.out.println("@ Company " + taraComp.getName() + " has logged in");
             addCoupons();
             updateCoupon();
+            deleteCoupon();
+            getAllCoupons();
         }
     }
 
-    private static void updateCoupon() {
-        Coupon couponToUpdate = CouponsStore.getCheeseCoupon();
-        System.out.println("couponToUpdate" + couponToUpdate);
-        // companyFacade.updateCoupon();
+    private static void getAllCoupons() {
+        try {
+            System.out.println("@ getAllCoupons");
+            companyFacade.getAllCoupons().forEach(System.out::println);
+        } catch (Exception e) {
+            System.out.println("getAllCoupons ex:" + e);
+        }
+    }
+
+    private static void deleteCoupon() {
+        try {
+            companyFacade.deleteCoupon(2);
+            System.out.println("@ deleteCoupon finished successfully");
+        } catch (Exception e) {
+            System.out.println("deleteCoupon ex:" + e);
+        }
     }
 
     private static void addCoupons() {
         try {
-            companyFacade.addCoupon(CouponsStore.getCheeseCoupon());
-            companyFacade.addCoupon(CouponsStore.getMiilkCoupon());
-            companyFacade.addCoupon(CouponsStore.getYogurtCoupon());
+            companyFacade.addCoupon(getCheeseCoupon(0, 0));
+            companyFacade.addCoupon(getMiilkCoupon());
+            companyFacade.addCoupon(getYogurtCoupon());
             System.out.println("@ addCoupon finished successfully");
             System.out.println("@ add coupon same title not allowed");
-            companyFacade.addCoupon(CouponsStore.getCheeseCouponSameTitle());
-        } catch (JDBCException e) {
+            companyFacade.addCoupon(getCheeseCoupon(2, 2));
+        } catch (Exception e) {
             System.out.println("addCoupon ex:" + e);
         }
     }
+
+    private static void updateCoupon() {
+        try {
+            Coupon couponToUpdate1 = getCheeseCoupon(1, companyFacade.getCompanyId());
+            couponToUpdate1.setImage("UPDATE_IMG");
+            companyFacade.updateCoupon(1, couponToUpdate1);
+            System.out.println("@ updateCoupon ended successfully");
+            System.out.println("@ updateCoupon companyId not allowed");
+            Coupon couponToUpdate2 = getCheeseCoupon(1, 3);
+            companyFacade.updateCoupon(1, couponToUpdate2);
+        } catch (Exception e) {
+            System.out.println("updateCoupon ex: " + e);
+        }
+    }
+
+
+    private static Coupon getCheeseCoupon(int id, int companyId) {
+        if (id > 0) {
+            return new Coupon(id, companyId, Category.Food.getId(), "גבינות", "קופון 20% הנחה על גבינות השמנת",
+                    Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), 0, 10, "image");
+        }
+        return new Coupon("גבינות", Category.Food.getId(), "קופון 20% הנחה על גבינות השמנת",
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), 0, 10, "image");
+    }
+
+    private static Coupon getYogurtCoupon() {
+        return new Coupon("יודורט", Category.Food.getId(), "קופון 5% הנחה על יודורט",
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 0, 10, "image");
+    }
+
+    private static Coupon getMiilkCoupon() {
+        return new Coupon("חלב", Category.Food.getId(), "קופון 10% הנחה על חלב",
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 0, 10, "image");
+    }
+
 }

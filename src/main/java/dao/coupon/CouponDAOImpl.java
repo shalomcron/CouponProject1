@@ -18,6 +18,7 @@ public class CouponDAOImpl implements CouponDAO {
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String QUERY_GET_ALL = "SELECT * FROM `coupone-bhp-386`.coupons";
+    private static final String QUERY_GET_ALL_COMPANY_COUPONS = "SELECT * FROM `coupone-bhp-386`.coupons WHERE (ID_COMPANY = ?)";
     private static final String QUERY_GET_ONE = "SELECT * FROM `coupone-bhp-386`.coupons WHERE id=?";
 
     private static final String QUERY_UPDATE = "UPDATE `coupone-bhp-386`.`coupons` " +
@@ -29,6 +30,9 @@ public class CouponDAOImpl implements CouponDAO {
             "(`ID_CUSTOMER`, `ID_COUPON`) VALUES (?, ?);";
     private static final String DELETE_ADD_COUPON_PURCHASE = "DELETE FROM `coupone-bhp-386`.`coupons_customers` " +
             "WHERE (`ID_CUSTOMER` = ?) and (`ID_COUPON` = ?)";
+
+    private static final String QUERY_IS_EXIST_BY_TITLE = "select exists (SELECT * FROM `coupone-bhp-386`.coupons " +
+            "WHERE (`ID_COMPANY` = ? and `TITLE` = ?) ) as RES;";
 
 
     private CouponDAOImpl() {}
@@ -56,6 +60,18 @@ public class CouponDAOImpl implements CouponDAO {
     public List<Coupon> getAll() throws JDBCException {
         List<Coupon> results = new ArrayList<>();
         List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ALL);
+        for (Map<String, Object> object : rows) {
+            results.add(ResultsUtils.couponFromRow(object));
+        }
+        return results;
+    }
+
+    @Override
+    public List<Coupon> getAllCompanyCoupons(int companyId) throws JDBCException {
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, companyId);
+        List<Coupon> results = new ArrayList<>();
+        List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ALL_COMPANY_COUPONS, params);
         for (Map<String, Object> object : rows) {
             results.add(ResultsUtils.couponFromRow(object));
         }
@@ -108,4 +124,13 @@ public class CouponDAOImpl implements CouponDAO {
         params.put(2, couponId);
         JDBCUtils.executeQuery(DELETE_ADD_COUPON_PURCHASE, params);
     }
+
+    @Override
+    public boolean isExistByTitle(int companyId, String title) throws JDBCException {
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, companyId);
+        params.put(2, title);
+        return ResultsUtils.isExistFromRow(JDBCUtils.executeQueryWithResults(QUERY_IS_EXIST_BY_TITLE, params).get(0));
+    }
+
 }
