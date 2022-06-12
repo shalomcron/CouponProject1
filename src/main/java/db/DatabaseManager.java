@@ -1,11 +1,17 @@
 package db;
 
+import beans.coupone.Category;
+import dao.category.CategoryDAO;
+import dao.category.CategoryDAOImpl;
+import exceptions.JDBCException;
+
 /**
  * Created by kobis on 08 May, 2022
  */
 public class DatabaseManager {
 
     private static final DatabaseManager instance = new DatabaseManager();
+    protected static final CategoryDAO categoryDAO = CategoryDAOImpl.getInstance();
 
     private DatabaseManager() {
     }
@@ -96,10 +102,22 @@ public class DatabaseManager {
             JDBCUtils.executeQuery(QUERY_CREATE_TABLE_CATEGORIES);
             JDBCUtils.executeQuery(QUERY_CREATE_TABLE_COUPONS);
             JDBCUtils.executeQuery(QUERY_CREATE_TABLE_COUPONS_CUSTOMERS);
+            insertCategories();
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
 
+    private void insertCategories() {
+        for (Category c: Category.values()) {
+            try {
+                categoryDAO.add(c);
+                System.out.println("@ insertCategories finished successfully");
+            } catch (JDBCException e) {
+                System.out.println("insertCategories ex:" + e);
+            }
+        }
+    }
 }

@@ -25,6 +25,8 @@ public class CompanyDAOImpl implements CompanyDAO {
     private static final String QUERY_DELETE = "DELETE FROM `coupone-bhp-386`.`companies` WHERE (`id` = ?);";
     private static final String QUERY_IS_EXIST = "select exists (SELECT * FROM `coupone-bhp-386`.companies " +
             "where EMAIL=? AND PASSWORD=?) as RES;";
+    private static final String QUERY_IS_EXIST_BY_NANE = "select exists (SELECT * FROM `coupone-bhp-386`.companies where NAME=?) as RES;";
+    private static final String QUERY_IS_EXIST_BY_EMAIL = "select exists (SELECT * FROM `coupone-bhp-386`.companies where EMAIL=?) as RES;";
 
     private CompanyDAOImpl() {
     }
@@ -70,6 +72,20 @@ public class CompanyDAOImpl implements CompanyDAO {
     }
 
     @Override
+    public boolean isExistByName(String name) throws JDBCException {
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, name);
+        return ResultsUtils.isExistFromRow(JDBCUtils.executeQueryWithResults(QUERY_IS_EXIST_BY_NANE, params).get(0));
+    }
+
+    @Override
+    public boolean isExistByEmail(String email) throws JDBCException {
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, email);
+        return ResultsUtils.isExistFromRow(JDBCUtils.executeQueryWithResults(QUERY_IS_EXIST_BY_EMAIL, params).get(0));
+    }
+
+    @Override
     public void update(Integer id, Company company) throws JDBCException {
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, company.getName());
@@ -88,7 +104,6 @@ public class CompanyDAOImpl implements CompanyDAO {
 
     @Override
     public boolean isExist(String email, String password) throws JDBCException {
-        boolean res = false;
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, email);
         params.put(2, password);

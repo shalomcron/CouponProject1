@@ -2,35 +2,32 @@ package facade.clients;
 
 import beans.cliens.Company;
 import beans.cliens.Customer;
-import beans.coupone.Category;
-import exceptions.ClientExistException;
-import exceptions.ClientNotExistException;
+import exceptions.CompanyException;
+import exceptions.CompanyMsg;
 import exceptions.JDBCException;
 
 import java.util.List;
 
 public class AdminFacade extends ClientFacade {
-    public AdminFacade() {
-        this.insertCategories();
-    }
-
     @Override
     public boolean login(String email, String password) {
         return email.equals("admin@admin.com") && password.equals("admin");
     }
 
-    public void addCompany(Company company) throws JDBCException, ClientExistException {
-        if (companyDAO.isExist(company.getEmail(), company.getPassword())) {
-            throw new ClientExistException(ClientType.Company, company.getEmail(), company.getPassword());
+    public void addCompany(Company company) throws JDBCException, CompanyException {
+        if (companyDAO.isExistByName(company.getName())) {
+            throw new CompanyException(CompanyMsg.COMPANY_NAME_ALREADY_EXIST);
+        }
+        if (companyDAO.isExistByEmail(company.getName())) {
+            throw new CompanyException(CompanyMsg.COMPANY_EMAIL_ALREADY_EXIST);
         }
         companyDAO.add(company);
     }
 
-    public void updateCompany(Company companyToUpdate) throws JDBCException, ClientNotExistException {
-        int id = companyToUpdate.getId();
+    public void updateCompany(int id, Company companyToUpdate) throws JDBCException, CompanyException {
         Company existCompany = companyDAO.getSingle(id);
         if (existCompany == null) {
-            throw new ClientNotExistException(ClientType.Company, companyToUpdate.getId());
+            throw new CompanyException(CompanyMsg.COMPANY_NOT_EXIST);
         }
         companyDAO.update(id, companyToUpdate);
     }
@@ -73,17 +70,6 @@ public class AdminFacade extends ClientFacade {
 
     public Customer geSingleCompany(int id) throws JDBCException {
         return customerDAO.getSingle(id);
-    }
-
-    private void insertCategories() {
-        for (Category c: Category.values()) {
-            try {
-                categoryDAO.add(c);
-                System.out.println("@ insertCategories finished successfully");
-            } catch (JDBCException e) {
-                System.out.println("insertCategories ex:" + e);
-            }
-        }
     }
 
 }

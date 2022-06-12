@@ -22,19 +22,21 @@ public class AdminFacadeTest {
         if (adminFacade != null) {
             // Companies
             addCompanies();
+            // add id company to company objects
             getClientsFromDB();
             updateCompany();
-            deleteCompany();
-            getAllCompanies();
-            getOneCompany();
-
-            // Customers
-            addCustomers();
-            getCustomersFromDB();
-            updateCustomer();
-            deleteCustomer();
-            getAllCustomers();
-            getOneCustomer();
+//            deleteCompany();
+//            getAllCompanies();
+//            getOneCompany();
+//
+//            // Customers
+//            addCustomers();
+//            // add id company to customers objects
+//            getCustomersFromDB();
+//            updateCustomer();
+//            deleteCustomer();
+//            getAllCustomers();
+//            getOneCustomer();
         }
     }
 
@@ -146,8 +148,10 @@ public class AdminFacadeTest {
             Company elalComp = CompanyStore.getElalComp();
             elalComp.setEmail("elal_changed@gmail.com");
             elalComp.setPassword("elal_changed_password");
-            adminFacade.updateCompany(elalComp);
+            adminFacade.updateCompany(elalComp.getId(), elalComp);
             System.out.println("@ updateCompany finished successfully");
+            // trying to update id
+            adminFacade.updateCompany(11, elalComp);
         } catch (Exception e) {
             System.out.println("updateCompany Exception:" + e);
         }
@@ -163,6 +167,8 @@ public class AdminFacadeTest {
             adminFacade.addCompany(zaralComp);
             adminFacade.addCompany(taraComp);
             System.out.println("@ addCompanies finished successfully");
+            // add same company name
+            adminFacade.addCompany(testComp);
         } catch (Exception e) {
             System.out.println("addCompanies:" + e);
         }
