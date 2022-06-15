@@ -10,8 +10,11 @@ public class MainTest {
         System.out.println("----- Main Tests START -----");
         System.out.println("---------- dropCreateStrategy ---------");
         DatabaseManager.getInstance().dropCreateStrategy();
-        // DAOTests();
-        // System.out.println("\n");
+        DAOTests();
+        // fasaeTests();
+    }
+
+    private static void fasaeTests() {
         System.out.println("\n ---------- adminFacadeTest START ---------");
         AdminFacadeTest.adminTest();
         System.out.println("---------- adminFacadeTest END ---------");
@@ -25,7 +28,6 @@ public class MainTest {
     }
 
 
-
     private static void DAOTests() {
         try {
             System.out.println("---------- DAOTests START ---------");
@@ -33,6 +35,7 @@ public class MainTest {
             CustomersTest.test();
             CategoriesTest.test();
             CouponTest.test();
+            CouponsCustomersTest.test();
             System.out.println("---------- DAOTests END ---------");
         } catch (JDBCException e) {
             System.out.println("DAOTests Exception: " + e.getMessage());

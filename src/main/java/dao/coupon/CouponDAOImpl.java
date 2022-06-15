@@ -32,11 +32,6 @@ public class CouponDAOImpl implements CouponDAO {
             "`DATE_START` = ?, `DATE_END` = ?, `AMOUNT` = ?, `PRICE` = ?, `IMAGE` = ? WHERE (`ID` = ?);";
     private static final String QUERY_DELETE = "DELETE FROM `coupone-bhp-386`.`coupons` WHERE (`ID` = ?)";
 
-    private static final String QUERY_ADD_COUPON_PURCHASE = "INSERT INTO `coupone-bhp-386`.`coupons_customers` " +
-            "(`ID_CUSTOMER`, `ID_COUPON`) VALUES (?, ?);";
-    private static final String DELETE_ADD_COUPON_PURCHASE = "DELETE FROM `coupone-bhp-386`.`coupons_customers` " +
-            "WHERE (`ID_CUSTOMER` = ?) and (`ID_COUPON` = ?)";
-
     private static final String QUERY_IS_EXIST_BY_TITLE = "select exists (SELECT * FROM `coupone-bhp-386`.coupons " +
             "WHERE (`ID_COMPANY` = ? and `TITLE` = ?) ) as RES;";
 
@@ -139,22 +134,6 @@ public class CouponDAOImpl implements CouponDAO {
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, id);
         JDBCUtils.executeQuery(QUERY_DELETE, params);
-    }
-
-    @Override
-    public void addCouponPurchase(int customerId, int couponId) throws JDBCException {
-        Map<Integer, Object> params = new HashMap<>();
-        params.put(1, customerId);
-        params.put(2, couponId);
-        JDBCUtils.executeQuery(QUERY_ADD_COUPON_PURCHASE, params);
-    }
-
-    @Override
-    public void deleteCouponPurchase(int customerId, int couponId) throws JDBCException {
-        Map<Integer, Object> params = new HashMap<>();
-        params.put(1, customerId);
-        params.put(2, couponId);
-        JDBCUtils.executeQuery(DELETE_ADD_COUPON_PURCHASE, params);
     }
 
     @Override

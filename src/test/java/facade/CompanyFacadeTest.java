@@ -107,31 +107,34 @@ public class CompanyFacadeTest {
 
 
     private static Coupon getCheeseCoupon(int id, int companyId) {
+        int amount = 3;
         if (id > 0) {
             return new Coupon(id, companyId, Category.Food.getId(), "גבינות", "קופון 10% הנחה על גבינות השמנת",
-                    Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), 0, 10, "image");
+                    Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), amount, 10, "image");
         }
         return new Coupon("גבינות", Category.Food.getId(), "קופון 10% הנחה על גבינות השמנת",
-                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), 0, 10, "image");
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), amount, 10, "image");
     }
 
     private static Coupon getYogurtCoupon() {
+        int amount = 2;
         return new Coupon("יוגורט", Category.Food.getId(), "קופון 30% הנחה על יודורט",
-                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 0, 30, "image");
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), amount, 30, "image");
     }
 
     private static Coupon getMiilkCoupon() {
+        int amount = 1;
         return new Coupon("חלב", Category.Food.getId(), "קופון 40% הנחה על חלב",
-                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 0, 40, "image");
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), amount, 40, "image");
     }
 
     private static Coupon getTripCoupone() {
         return new Coupon("טיול", Category.Vacation.getId(), "קופון 50% לטיול באירופה",
-                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 0, 50, "image");
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 10, 50, "image");
     }
 
     private static Coupon getRestaurantCoupone() {
         return new Coupon("מסעדה", Category.Restaurant.getId(), "קופון 60% למסעדה",
-                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 0, 60, "image");
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 10, 60, "image");
     }
 }

@@ -21,8 +21,6 @@ public class CouponTest {
         getSingleCoupon();
         // updateCoupon();
         // deleteCoupon();
-        addCouponPurchase();
-        deleteCouponPurchase();
     }
 
         public static void insertCoupons() throws JDBCException {
@@ -76,21 +74,6 @@ public class CouponTest {
         couponDAO.delete(id);
         System.out.println("After delete Coupon " + id);
         getAllCoupons();
-    }
-
-    public static void addCouponPurchase() throws JDBCException {
-        System.out.println("addCouponPurchase");
-        couponDAO.addCouponPurchase(1, 1);
-        couponDAO.addCouponPurchase(2, 2);
-        couponDAO.addCouponPurchase(3, 3);
-        couponDAO.addCouponPurchase(4, 4);
-        couponDAO.addCouponPurchase(5, 5);
-    }
-
-    private static void deleteCouponPurchase() throws JDBCException {
-        System.out.println("deleteCouponPurchase");
-        couponDAO.deleteCouponPurchase(1, 1);
-        couponDAO.deleteCouponPurchase(5, 5);
     }
 
 }
