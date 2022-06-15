@@ -15,10 +15,16 @@ public class CouponsCustomersTest {
         purchaseCoupon();
         getAllPurchases();
         getSinglePurchase();
-        // updateCoupon();
-        // deleteCoupon();
-//        addCouponPurchase();
-//        deleteCouponPurchase();
+        deletePurchase();
+    }
+
+    private static void deletePurchase() {
+        System.out.println("@ deletePurchase");
+        try {
+            couponsCustomersDAO.deletePurchase(1, 1);
+        } catch (Exception e) {
+            System.out.println("deletePurchase ex:" + e);
+        }
     }
 
     private static void getSinglePurchase() {
