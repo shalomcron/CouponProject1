@@ -1,6 +1,5 @@
 package dao.couponsCustomers;
 
-import beans.coupone.Coupon;
 import beans.couponsCustomer.CouponsCustomer;
 import db.JDBCUtils;
 import db.ResultsUtils;
@@ -26,16 +25,15 @@ public class CouponsCustomersDAOImpl implements CouponsCustomersDAO {
     private static final String DELETE_ADD_COUPON_PURCHASE = "DELETE FROM `coupone-bhp-386`.`coupons_customers` " +
             "WHERE (`ID_CUSTOMER` = ?) and (`ID_COUPON` = ?)";
 
-//    private static final String QUERY_INSERT = "INSERT INTO `coupone-bhp-386`.`coupons_customers` " +
-//            "(`ID_CUSTOMER`, `ID_COUPON`) VALUES (?, ?);";
 
     private static final String QUERY_GET_ALL = "SELECT * FROM `coupone-bhp-386`.coupons_customers;";
-    private static final String QUERY_GET_ONE = "";
+    private static final String QUERY_GET_ONE_PURCHASE = "SELECT * FROM `coupone-bhp-386`.coupons_customers " +
+            "WHERE ID_CUSTOMER=? AND ID_COUPON=?";
     private static final String QUERY_UPDATE = "";
     private static final String QUERY_DELETE = "";
 
     @Override
-    public void add(CouponsCustomer couponsCustomer) throws JDBCException {
+    public void purchaseCoupon(CouponsCustomer couponsCustomer) throws JDBCException {
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, couponsCustomer.getCustomerID());
         params.put(2, couponsCustomer.getCouponId());
@@ -43,7 +41,7 @@ public class CouponsCustomersDAOImpl implements CouponsCustomersDAO {
     }
 
     @Override
-    public List<CouponsCustomer> getAll() throws JDBCException {
+    public List<CouponsCustomer> getAllPurchases() throws JDBCException {
         List<CouponsCustomer> results = new ArrayList<>();
         List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ALL);
         for (Map<String, Object> object : rows) {
@@ -53,13 +51,12 @@ public class CouponsCustomersDAOImpl implements CouponsCustomersDAO {
     }
 
     @Override
-    public CouponsCustomer getSingle(Integer integer) throws JDBCException {
-        return null;
-    }
-
-    @Override
-    public void update(Integer integer, CouponsCustomer couponsCustomer) throws JDBCException {
-
+    public CouponsCustomer getSinglePurchase(int couponId, int customerId) throws JDBCException {
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, couponId);
+        params.put(2, customerId);
+        List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ONE_PURCHASE, params);
+        return rows.size() > 0 ? ResultsUtils.couponsCustomerFromRow(rows.get(0)) : null;
     }
 
     @Override

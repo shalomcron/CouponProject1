@@ -1,10 +1,7 @@
 package dao;
 
 import beans.couponsCustomer.CouponsCustomer;
-import dao.coupon.CouponDAO;
-import dao.coupon.CouponDAOImpl;
 import dao.couponsCustomers.CouponsCustomersDAOImpl;
-import exceptions.JDBCException;
 
 public class CouponsCustomersTest {
     private static final CouponsCustomersDAOImpl couponsCustomersDAO = CouponsCustomersDAOImpl.getInstance();
@@ -15,28 +12,38 @@ public class CouponsCustomersTest {
         System.out.println("*************************");
         System.out.println("*** CouponsCustomersTest ***");
         System.out.println("*************************");
-        purchase();
-        getAllPurchase();
-//        getSingleCoupon();
+        purchaseCoupon();
+        getAllPurchases();
+        getSinglePurchase();
         // updateCoupon();
         // deleteCoupon();
 //        addCouponPurchase();
 //        deleteCouponPurchase();
     }
 
-    private static void getAllPurchase() {
+    private static void getSinglePurchase() {
+        System.out.println("@ getSinglePurchase");
         try {
-            couponsCustomersDAO.getAll().forEach(System.out::println);
+            System.out.println(couponsCustomersDAO.getSinglePurchase(1, 1));
         } catch (Exception e) {
             System.out.println("getAllPurchase ex:" + e);
         }
     }
 
-    private static void purchase() {
+    private static void getAllPurchases() {
+        System.out.println("@ getAllPurchase");
         try {
-            couponsCustomersDAO.add(couponsCustomer1);
-            couponsCustomersDAO.add(couponsCustomer2);
-            couponsCustomersDAO.add(couponsCustomer1);
+            couponsCustomersDAO.getAllPurchases().forEach(System.out::println);
+        } catch (Exception e) {
+            System.out.println("getAllPurchase ex:" + e);
+        }
+    }
+
+    private static void purchaseCoupon() {
+        try {
+            couponsCustomersDAO.purchaseCoupon(couponsCustomer1);
+            couponsCustomersDAO.purchaseCoupon(couponsCustomer2);
+            couponsCustomersDAO.purchaseCoupon(couponsCustomer1);
             System.out.println("@ purchaseCoupons finished successfully");
         } catch (Exception e) {
             System.out.println("purchaseCoupons ex:" + e);

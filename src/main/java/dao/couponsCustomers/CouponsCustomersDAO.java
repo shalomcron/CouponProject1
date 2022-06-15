@@ -1,8 +1,19 @@
 package dao.couponsCustomers;
 
+// extends DAO<CouponsCustomer, Integer>
+
 import beans.couponsCustomer.CouponsCustomer;
-import dao.DAO;
+import exceptions.JDBCException;
 
-public interface CouponsCustomersDAO extends DAO<CouponsCustomer, Integer> {
+import java.util.List;
 
+public interface CouponsCustomersDAO {
+
+    void purchaseCoupon(CouponsCustomer couponsCustomer) throws JDBCException;
+
+    List<CouponsCustomer> getAllPurchases() throws JDBCException;
+
+    CouponsCustomer getSinglePurchase(int couponId, int customerId) throws JDBCException;
+
+    void delete(Integer integer) throws JDBCException;
 }
