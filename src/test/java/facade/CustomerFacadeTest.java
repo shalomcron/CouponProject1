@@ -17,6 +17,7 @@ public class CustomerFacadeTest {
     }
 
     private static void purchaseCoupon(int couponIdToPurchase) {
+        System.out.println("@ purchaseCoupon coupon " + couponIdToPurchase);
         try {
             customerFacade.purchaseCoupon(couponIdToPurchase);
             System.out.println("@ purchaseCoupon " + couponIdToPurchase + " finished successfully");

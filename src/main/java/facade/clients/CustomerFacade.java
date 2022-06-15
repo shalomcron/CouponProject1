@@ -31,12 +31,14 @@ public class CustomerFacade extends ClientFacade {
 
     public void purchaseCoupon(int couponId) throws JDBCException, CouponException {
         Coupon coupon = couponDAO.getSingle(couponId);
-        System.out.println("purchaseCoupon coupon " + coupon);
-        if (coupon.getAmount() == 0) {
-            throw new CouponException(CouponMsg.NO_COUPON_LEFT);
+        if (coupon == null) {
+            throw new CouponException(CouponMsg.NO_COUPON_EXIST);
         }
         LocalDate endDate = coupon.getEndDate().toLocalDate();
         LocalDate now = LocalDate.now();
+        if (coupon.getAmount() == 0) {
+            throw new CouponException(CouponMsg.NO_COUPON_LEFT);
+        }
         if (endDate.isBefore(now)) {
             throw new CouponException(CouponMsg.COUPON_EXPIRED);
         }

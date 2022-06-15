@@ -110,7 +110,7 @@ public class CouponDAOImpl implements CouponDAO {
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, id);
         List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ONE, params);
-        return ResultsUtils.couponFromRow(rows.get(0));
+        return rows.size() > 0 ? ResultsUtils.couponFromRow(rows.get(0)): null;
     }
 
     @Override

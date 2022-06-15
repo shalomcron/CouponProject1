@@ -10,21 +10,21 @@ public class MainTest {
         System.out.println("----- Main Tests START -----");
         System.out.println("---------- dropCreateStrategy ---------");
         DatabaseManager.getInstance().dropCreateStrategy();
-        DAOTests();
-        // fasaeTests();
+//        DAOTests();
+         fasadeTests();
     }
 
-    private static void fasaeTests() {
-        System.out.println("\n ---------- adminFacadeTest START ---------");
+    private static void fasadeTests() {
+        System.out.println(" ---------- adminFacadeTest START ---------");
         AdminFacadeTest.adminTest();
         System.out.println("---------- adminFacadeTest END ---------");
-        System.out.println("\n ---------- companyFacadeTest START ---------");
+        System.out.println(" ---------- companyFacadeTest START ---------");
         CompanyFacadeTest.companyTest();
         System.out.println(" ---------- companyFacadeTest END ---------");
-        System.out.println("\n ---------- customerFacadeTest START ---------");
+        System.out.println(" ---------- customerFacadeTest START ---------");
         CustomerFacadeTest.customerTest();
         System.out.println(" ---------- customerFacadeTest END ---------");
-        System.out.println("\n ----- Main Tests END -----");
+        System.out.println(" ----- Main Tests END -----");
     }
 
 
