@@ -1,9 +1,12 @@
 package dao.couponsCustomers;
 
+import beans.coupone.Coupon;
 import beans.couponsCustomer.CouponsCustomer;
 import db.JDBCUtils;
+import db.ResultsUtils;
 import exceptions.JDBCException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +44,12 @@ public class CouponsCustomersDAOImpl implements CouponsCustomersDAO {
 
     @Override
     public List<CouponsCustomer> getAll() throws JDBCException {
-        return null;
+        List<CouponsCustomer> results = new ArrayList<>();
+        List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ALL);
+        for (Map<String, Object> object : rows) {
+            results.add(ResultsUtils.couponsCustomerFromRow(object));
+        }
+        return results;
     }
 
     @Override

@@ -4,6 +4,7 @@ import beans.cliens.Company;
 import beans.cliens.Customer;
 import beans.coupone.Category;
 import beans.coupone.Coupon;
+import beans.couponsCustomer.CouponsCustomer;
 
 import java.sql.Date;
 import java.util.Map;
@@ -46,14 +47,14 @@ public class ResultsUtils {
         return new Coupon(id, companyId, categoryId, title, description, startDate, endDate, amount, price, image);
     }
 
-//    public static CouponsVsCustomers couponsVsCustomers(Map<String, Object> map) {
-//        int customerId = (int) map.get("ID_CUSTOMER");
-//        int couponId = (int) map.get("ID_COUPON");
-//        return new CouponsVsCustomers(customerId, couponId);
-//    }
-
     public static boolean isExistFromRow(Map<String, Object> map) {
         Long res = (Long) map.get("RES");
         return res == 1;
+    }
+
+    public static CouponsCustomer couponsCustomerFromRow(Map<String, Object> map) {
+        int customerId = (int) map.get("ID_CUSTOMER");
+        int couponId = (int) map.get("ID_COUPON");
+        return new CouponsCustomer(customerId, couponId);
     }
 }
