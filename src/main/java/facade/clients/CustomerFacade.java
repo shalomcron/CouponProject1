@@ -2,9 +2,10 @@ package facade.clients;
 
 import beans.cliens.Customer;
 import beans.coupone.Coupon;
+import beans.couponsCustomer.CouponsCustomer;
 import exceptions.CouponException;
-import exceptions.CouponMsg;
 import exceptions.JDBCException;
+import exceptions.PurchaseCouponMsg;
 
 import java.time.LocalDate;
 
@@ -31,19 +32,23 @@ public class CustomerFacade extends ClientFacade {
 
     public void purchaseCoupon(int couponId) throws JDBCException, CouponException {
         Coupon coupon = couponDAO.getSingle(couponId);
+        System.out.println("coupon couponId:" + couponId + ":" + coupon);
+        if (couponsCustomersDAO.couponWasPurchased(getCustomerId())) {
+            throw new CouponException(PurchaseCouponMsg.COUPON_WAS_ALREADY_PURCHASED);
+        }
         if (coupon == null) {
-            throw new CouponException(CouponMsg.NO_COUPON_EXIST);
+            throw new CouponException(PurchaseCouponMsg.NO_COUPON_EXIST);
+        }
+        if (coupon.getAmount() == 0) {
+            throw new CouponException(PurchaseCouponMsg.NO_COUPON_LEFT);
         }
         LocalDate endDate = coupon.getEndDate().toLocalDate();
         LocalDate now = LocalDate.now();
-        if (coupon.getAmount() == 0) {
-            throw new CouponException(CouponMsg.NO_COUPON_LEFT);
-        }
         if (endDate.isBefore(now)) {
-            throw new CouponException(CouponMsg.COUPON_EXPIRED);
+            throw new CouponException(PurchaseCouponMsg.COUPON_EXPIRED);
         }
-//        if (customerDAO.hasPurchaseCoupon(couponId, getCustomerId())) {
-//
-//        }
+        couponsCustomersDAO.purchaseCoupon(new CouponsCustomer(getCustomerId(), couponId));
+        coupon.setAmount(coupon.getAmount() -1);
+        couponDAO.update(8, coupon);
     }
 }

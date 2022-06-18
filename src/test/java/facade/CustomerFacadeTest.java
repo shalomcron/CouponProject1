@@ -1,6 +1,5 @@
 package facade;
 
-import exceptions.JDBCException;
 import facade.clients.ClientType;
 import facade.clients.CustomerFacade;
 import facade.login.LoginManager;
@@ -17,7 +16,6 @@ public class CustomerFacadeTest {
     }
 
     private static void purchaseCoupon(int couponIdToPurchase) {
-        System.out.println("@ purchaseCoupon coupon " + couponIdToPurchase);
         try {
             customerFacade.purchaseCoupon(couponIdToPurchase);
             System.out.println("@ purchaseCoupon " + couponIdToPurchase + " finished successfully");

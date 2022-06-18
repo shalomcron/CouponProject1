@@ -69,7 +69,7 @@ public class CompanyFacadeTest {
 
     private static void deleteCoupon() {
         try {
-            companyFacade.deleteCoupon(2);
+            companyFacade.deleteCoupon(5);
             System.out.println("@ deleteCoupon finished successfully");
         } catch (Exception e) {
             System.out.println("deleteCoupon ex:" + e);
