@@ -32,7 +32,6 @@ public class CustomerFacade extends ClientFacade {
 
     public void purchaseCoupon(int couponId) throws JDBCException, CouponException {
         Coupon coupon = couponDAO.getSingle(couponId);
-        System.out.println("coupon couponId:" + couponId + ":" + coupon);
         if (couponsCustomersDAO.couponWasPurchased(getCustomerId(), couponId)) {
             throw new CouponException(PurchaseCouponMsg.COUPON_WAS_ALREADY_PURCHASED);
         }
