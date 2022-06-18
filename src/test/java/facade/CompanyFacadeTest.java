@@ -116,17 +116,18 @@ public class CompanyFacadeTest {
                 Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), amount, 10, "image");
     }
 
-    private static Coupon getYogurtCoupon() {
-        int amount = 2;
-        return new Coupon("יוגורט", Category.Food.getId(), "קופון 30% הנחה על יודורט",
-                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), amount, 30, "image");
-    }
-
     private static Coupon getMiilkCoupon() {
         int amount = 1;
         return new Coupon("חלב", Category.Food.getId(), "קופון 40% הנחה על חלב",
-                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), amount, 40, "image");
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), amount, 40, "image");
     }
+
+    private static Coupon getYogurtCoupon() {
+        int amount = 2;
+        return new Coupon("יוגורט", Category.Food.getId(), "קופון 30% הנחה על יודורט",
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), amount, 30, "image");
+    }
+
 
     private static Coupon getTripCoupone() {
         return new Coupon("טיול", Category.Vacation.getId(), "קופון 50% לטיול באירופה",

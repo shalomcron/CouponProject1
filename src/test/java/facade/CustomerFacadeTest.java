@@ -10,11 +10,18 @@ public class CustomerFacadeTest {
 
     public static void customerTest() {
         if (customerFacade != null) {
-            purchaseCoupon(1); // גבינות
-            purchaseCoupon(2); // יוגורט
+            purchaseCoupons();
+
         }
     }
 
+    private static void purchaseCoupons() {
+        purchaseCoupon(1); // גבינות
+        purchaseCoupon(2); // חלב
+        purchaseCoupon(2); // חלב
+        purchaseCoupon(3); // יוגורט
+        purchaseCoupon(4); // טיול
+    }
     private static void purchaseCoupon(int couponIdToPurchase) {
         try {
             customerFacade.purchaseCoupon(couponIdToPurchase);

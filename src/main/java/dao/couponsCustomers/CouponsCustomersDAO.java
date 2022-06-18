@@ -17,5 +17,5 @@ public interface CouponsCustomersDAO {
 
     void deletePurchase(int couponId, int customerId) throws JDBCException;
 
-    boolean couponWasPurchased(int customerId) throws JDBCException;
+    boolean couponWasPurchased(int customerId, int couponId) throws JDBCException;
 }

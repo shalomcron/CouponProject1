@@ -33,7 +33,7 @@ public class CustomerFacade extends ClientFacade {
     public void purchaseCoupon(int couponId) throws JDBCException, CouponException {
         Coupon coupon = couponDAO.getSingle(couponId);
         System.out.println("coupon couponId:" + couponId + ":" + coupon);
-        if (couponsCustomersDAO.couponWasPurchased(getCustomerId())) {
+        if (couponsCustomersDAO.couponWasPurchased(getCustomerId(), couponId)) {
             throw new CouponException(PurchaseCouponMsg.COUPON_WAS_ALREADY_PURCHASED);
         }
         if (coupon == null) {
@@ -49,6 +49,6 @@ public class CustomerFacade extends ClientFacade {
         }
         couponsCustomersDAO.purchaseCoupon(new CouponsCustomer(getCustomerId(), couponId));
         coupon.setAmount(coupon.getAmount() -1);
-        couponDAO.update(8, coupon);
+        couponDAO.update(coupon.getId(), coupon);
     }
 }
