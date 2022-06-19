@@ -1,5 +1,7 @@
 package facade;
+
 import beans.cliens.Customer;
+import beans.coupone.Coupon;
 import facade.clients.ClientType;
 import facade.clients.CustomerFacade;
 import facade.login.LoginManager;
@@ -9,5 +11,15 @@ public class CustomerFacadeTest {
 
     public static CustomerFacade login(Customer company) {
         return (CustomerFacade) loginManager.login(company.getEmail(), company.getPassword(), ClientType.Customer);
+    }
+
+    public static void purchaseCoupon(CustomerFacade customerFacade, Coupon coupon) {
+        try {
+            System.out.printf("@ purchaseCoupon %s for customer %s(%s) \n", coupon.getTitle(), customerFacade.getCustomerId(), customerFacade.getCustomerName());
+            customerFacade.purchaseCoupon(coupon.getId());
+            System.out.println("@ purchaseCoupon finished successfully");
+        } catch (Exception e) {
+            System.out.println("purchaseCoupon ex:" + e);
+        }
     }
 }

@@ -1,11 +1,18 @@
 import beans.cliens.Company;
 import beans.cliens.Customer;
+import beans.coupone.Category;
+import beans.coupone.Coupon;
 import db.DatabaseManager;
 import facade.AdminFacadeTest;
 import facade.CustomerFacadeTest;
 import facade.clients.CustomerFacade;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 public class MainTest {
+    private static int AMOUNT_COUPONS = 2;
     private static CustomerFacade customerFacade1, customerFacade2, customerFacade3;
 
     public static void main(String[] args) {
@@ -67,18 +74,19 @@ public class MainTest {
         AdminFacadeTest.getAllCustomers();
         AdminFacadeTest.getOneCustomer(getCustomer1().getId());
 
-        // Customers
-        // login customerFacade1
-        // customerFacade1 = CustomerFacade.log
-
         System.out.println("---------- CustomerFacadeTest - login with customer 1 ---------");
         customerFacade1 = CustomerFacadeTest.login(getCustomer1());
         if (customerFacade1 != null) {
-            // CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon1());
+            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon1());
         }
 
 
         System.out.println("----- Main Tests END -----");
+    }
+
+    private static Coupon getCoupon1() {
+        return new Coupon("גבינות", Category.Food.getId(), "קופון 10% הנחה על גבינות השמנת",
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), AMOUNT_COUPONS, 10, "image");
     }
 
 

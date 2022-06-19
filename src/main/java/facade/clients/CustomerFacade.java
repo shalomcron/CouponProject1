@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 public class CustomerFacade extends ClientFacade {
     private int customerId;
+    private String customerName;
 
     @Override
     public boolean login(String email, String password) {
@@ -18,6 +19,7 @@ public class CustomerFacade extends ClientFacade {
             Customer customer = customerDAO.getSingle(email, password);
             if (customer != null) {
                 this.customerId = customer.getId();
+                this.customerName= customer.getFirstName();
                 return true;
             }
         } catch (JDBCException e) {
@@ -28,6 +30,9 @@ public class CustomerFacade extends ClientFacade {
 
     public int getCustomerId() {
         return customerId;
+    }
+    public String getCustomerName() {
+        return this.customerName;
     }
 
     public void purchaseCoupon(int couponId) throws JDBCException, CouponException {
@@ -50,4 +55,5 @@ public class CustomerFacade extends ClientFacade {
         coupon.setAmount(coupon.getAmount() -1);
         couponDAO.update(coupon.getId(), coupon);
     }
+
 }
