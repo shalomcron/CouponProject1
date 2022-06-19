@@ -1,6 +1,7 @@
 package facade;
 
 import beans.cliens.Company;
+import beans.cliens.Customer;
 import exceptions.JDBCException;
 import facade.clients.AdminFacade;
 import facade.clients.ClientType;
@@ -15,13 +16,11 @@ public class AdminFacadeTest {
     }
 
     public static void addCompany(Company company1) {
-        if (adminFacade != null) {
-            try {
-                adminFacade.addCompany(company1);
-                System.out.printf("@ addCompany %s finished successfully \n", company1.getName());
-            } catch (Exception e) {
-                System.out.println("addCustomers ex:" + e);
-            }
+        try {
+            adminFacade.addCompany(company1);
+            System.out.printf("@ addCompany %s finished successfully \n", company1.getName());
+        } catch (Exception e) {
+            System.out.println("addCustomers ex:" + e);
         }
     }
 
@@ -52,4 +51,21 @@ public class AdminFacadeTest {
         }
     }
 
+    public static void getOneCompany(Company company) {
+        System.out.println("@ getOneCompany");
+        try {
+            System.out.println(adminFacade.getOneCompany(company.getId()));
+        } catch (JDBCException e) {
+            System.out.println("getOneCompany ex:" + e);
+        }
+    }
+
+    public static void addCustomer(Customer customer) {
+        try {
+        adminFacade.addCustomer(customer);
+        System.out.printf("@ addCustomer %s finished successfully \n", customer.getFirstName());
+        } catch (Exception e) {
+            System.out.println("addCustomers ex:" + e);
+        }
+    }
 }

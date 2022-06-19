@@ -2,12 +2,16 @@ import beans.cliens.Company;
 import beans.cliens.Customer;
 import db.DatabaseManager;
 import facade.AdminFacadeTest;
+import facade.clients.CustomerFacade;
 
 public class MainTest {
+    private static CustomerFacade customerFacade1, customerFacade2, customerFacade3;
+
     public static void main(String[] args) {
         System.out.println("----- Main Tests START -----");
         System.out.println("---------- dropCreateStrategy ---------");
         DatabaseManager.getInstance().dropCreateStrategy();
+        System.out.println("---------- AdminFacadeTest - Company ---------");
         AdminFacadeTest.adminLogin();
         AdminFacadeTest.addCompany(getCompany1());
         AdminFacadeTest.addCompany(getCompany2());
@@ -28,19 +32,40 @@ public class MainTest {
         companyToUpdate.setEmail("getCompany3 new email");
         companyToUpdate.setPassword("getCompany3 new password");
         AdminFacadeTest.updateCompany(companyToUpdate.getId(), companyToUpdate);
-        // trying to update id
+        System.out.println("* trying to update id");
         companyToUpdate.setId(8);
         AdminFacadeTest.updateCompany(getCompany1().getId(), companyToUpdate);
-        // trying to update name
+        System.out.println("* trying to update name");
         companyToUpdate = getCompany1();
         companyToUpdate.setName("bla");
         AdminFacadeTest.updateCompany(companyToUpdate.getId(), companyToUpdate);
 
-        // deleteCompany
         AdminFacadeTest.addCompany(getCompany4());
         AdminFacadeTest.deleteCompany(getCompany4());
-
         AdminFacadeTest.getAllCompanies();
+        AdminFacadeTest.getOneCompany(getCompany3());
+
+        System.out.println("---------- AdminFacadeTest - Customer ---------");
+        AdminFacadeTest.addCustomer(getCustomer1());
+        AdminFacadeTest.addCustomer(getCustomer2());
+        AdminFacadeTest.addCustomer(getCustomer3());
+        System.out.println("* trying to add customer with exixiting email");
+        Customer customerToUpdateName = getCustomer4();
+        customerToUpdateName.setEmail(getCompany1().getEmail());
+        AdminFacadeTest.addCustomer(customerToUpdateName);
+
+//        addCustomer();
+//        updateCustomer();
+//        deleteCustomer();
+//        getAllCustomers();
+//        getOneCustomer();
+
+
+
+        // Customers
+        // login customerFacade1
+        // customerFacade1 = CustomerFacade.log
+
         System.out.println("----- Main Tests END -----");
     }
 
@@ -71,5 +96,8 @@ public class MainTest {
 
     public static Customer getCustomer3() {
         return new Customer(3,"customer3", "customer3Family", "customer3@gmail.com", "customer3_password");
+    }
+    public static Customer getCustomer4() {
+        return new Customer(3,"customer4", "customer4Family", "customer4@gmail.com", "customer4_password");
     }
 }
