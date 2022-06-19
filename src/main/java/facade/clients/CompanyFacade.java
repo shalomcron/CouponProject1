@@ -11,6 +11,7 @@ import java.util.List;
 
 public class CompanyFacade extends ClientFacade {
     private int companyId;
+    private String companyName;
 
     @Override
     public boolean login(String email, String password) {
@@ -18,6 +19,7 @@ public class CompanyFacade extends ClientFacade {
             Company company = companyDAO.getSingle(email, password);
             if (company != null) {
                 this.companyId = company.getId();
+                this.companyName = company.getName();
                 return true;
             }
         } catch (JDBCException e) {
@@ -67,5 +69,9 @@ public class CompanyFacade extends ClientFacade {
 
     public Company getCompanyDetails() throws JDBCException {
         return companyDAO.getSingle(this.companyId);
+    }
+
+    public String getCompanyName() {
+        return companyName;
     }
 }

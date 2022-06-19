@@ -4,7 +4,9 @@ import beans.coupone.Category;
 import beans.coupone.Coupon;
 import db.DatabaseManager;
 import facade.AdminFacadeTest;
+import facade.CompanyFacadeTest;
 import facade.CustomerFacadeTest;
+import facade.clients.CompanyFacade;
 import facade.clients.CustomerFacade;
 
 import java.sql.Date;
@@ -12,8 +14,10 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class MainTest {
-    private static int AMOUNT_COUPONS = 2;
-    private static CustomerFacade customerFacade1, customerFacade2, customerFacade3;
+    private static final int AMOUNT_COUPONS = 2;
+    private static int counterCoupone = 1;
+    private static CompanyFacade companyFacade1, companyFacade2;
+    private static CustomerFacade customerFacade1, customerFacade2;
 
     public static void main(String[] args) {
         System.out.println("----- Main Tests START -----");
@@ -75,17 +79,48 @@ public class MainTest {
         AdminFacadeTest.getOneCustomer(getCustomer1().getId());
 
         System.out.println("---------- CustomerFacadeTest - login with customer 1 ---------");
-        customerFacade1 = CustomerFacadeTest.login(getCustomer1());
-        if (customerFacade1 != null) {
-            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon1());
+        companyFacade1 = CompanyFacadeTest.login(getCompany1());
+        System.out.println("companyFacade1" + companyFacade1);
+        if (companyFacade1 != null) {
+            int companyId = companyFacade1.getCompanyId();
+            Coupon coupon1 = getCoupon1(counterCoupone++, companyId);
+            CompanyFacadeTest.addCoupons(companyFacade1, coupon1);
+            Coupon coupon2 = getCoupon2(counterCoupone++, companyId);
+            CompanyFacadeTest.addCoupons(companyFacade1, coupon2);
+            Coupon coupon3 = getCoupon3(counterCoupone++, companyId);
+            CompanyFacadeTest.addCoupons(companyFacade1, coupon3);
+            coupon1.setTitle("TITLE UPDATED");
+            CompanyFacadeTest.updateCoupon(companyFacade1, 1, coupon1);
+//
+//        updateCoupon();
+//        deleteCoupon();
+//        getAllCoupons();
+//        getAllCategoryCoupons();
+//        getAllMaxPriceCoupons();
+//        getCompanyDetails();
         }
+
+
+//        System.out.println("---------- CustomerFacadeTest - login with customer 1 ---------");
+//        customerFacade1 = CustomerFacadeTest.login(getCustomer1());
+//        if (customerFacade1 != null) {
+//            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon1());
+//        }
 
 
         System.out.println("----- Main Tests END -----");
     }
 
-    private static Coupon getCoupon1() {
-        return new Coupon("גבינות", Category.Food.getId(), "קופון 10% הנחה על גבינות השמנת",
+    private static Coupon getCoupon1(int couponId, int companyId) {
+        return new Coupon(couponId, companyId, Category.Food.getId(), "גבינות", "קופון 10% הנחה על גבינות השמנת",
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), AMOUNT_COUPONS, 10, "image");
+    }
+    private static Coupon getCoupon2(int couponId, int companyId) {
+        return new Coupon(couponId, companyId, Category.Restaurant.getId(), "מסעדה", "קופון 60% למסעדה",
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), AMOUNT_COUPONS, 10, "image");
+    }
+    private static Coupon getCoupon3(int couponId, int companyId) {
+        return new Coupon(couponId, companyId, Category.Vacation.getId(), "טיול", "קופון 50% לטיול באירופה",
                 Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), AMOUNT_COUPONS, 10, "image");
     }
 
