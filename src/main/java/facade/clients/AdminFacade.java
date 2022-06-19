@@ -16,7 +16,7 @@ public class AdminFacade extends ClientFacade {
         if (companyDAO.isExistByName(company.getName())) {
             throw new CompanyException(CompanyMsg.COMPANY_NAME_ALREADY_EXIST);
         }
-        if (companyDAO.isExistByEmail(company.getName())) {
+        if (companyDAO.isExistByEmail(company.getEmail())) {
             throw new CompanyException(CompanyMsg.COMPANY_EMAIL_ALREADY_EXIST);
         }
         companyDAO.add(company);

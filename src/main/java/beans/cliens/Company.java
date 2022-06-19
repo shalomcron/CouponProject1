@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Company {
     private int id;
-    private final String name;
+    private String name;
     private String email;
     private String password;
     private final List<Coupon> coupons = new ArrayList<>();
@@ -29,6 +29,10 @@ public class Company {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
