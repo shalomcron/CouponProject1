@@ -11,8 +11,12 @@ public class CustomerFacadeTest {
     public static void customerTest() {
         if (customerFacade != null) {
             purchaseCoupons();
-
+            showPurchasedCoupons();
         }
+    }
+
+    private static void showPurchasedCoupons() {
+
     }
 
     private static void purchaseCoupons() {
