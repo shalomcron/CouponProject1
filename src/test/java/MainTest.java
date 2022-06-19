@@ -19,14 +19,14 @@ public class MainTest {
         AdminFacadeTest.addCompany(companyAddSameId);
 
         // try to add exist same company email
-        Company companyAddSameEail = getCompany3();
-        companyAddSameEail.setEmail(getCompany1().getEmail());
-        AdminFacadeTest.addCompany(companyAddSameEail);
+        Company companyAddSameEmail = getCompany3();
+        companyAddSameEmail.setEmail(getCompany1().getEmail());
+        AdminFacadeTest.addCompany(companyAddSameEmail);
 
         // updateCompany
         Company companyToUpdate = getCompany3();
-        companyToUpdate.setEmail("company5 new email");
-        companyToUpdate.setPassword("company5 new assword");
+        companyToUpdate.setEmail("getCompany3 new email");
+        companyToUpdate.setPassword("getCompany3 new password");
         AdminFacadeTest.updateCompany(companyToUpdate.getId(), companyToUpdate);
         // trying to update id
         companyToUpdate.setId(8);
