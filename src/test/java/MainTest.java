@@ -5,6 +5,7 @@ import beans.coupone.Coupon;
 import db.DatabaseManager;
 import facade.AdminFacadeTest;
 import facade.CompanyFacadeTest;
+import facade.CustomerFacadeTest;
 import facade.clients.CompanyFacade;
 import facade.clients.CustomerFacade;
 
@@ -116,23 +117,25 @@ public class MainTest {
             CompanyFacadeTest.getCompanyDetails(companyFacade2);
         }
 
-//
-//        System.out.println("---------- CustomerFacadeTest - login with customer 1 ---------");
-//        customerFacade1 = CustomerFacadeTest.login(getCustomer1());
-//        if (customerFacade1 != null) {
-//            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon2(2, companyFacade2.getCompanyId()));
-//            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon3(3, companyFacade2.getCompanyId()));
-//            System.out.println("* trying to purchase noe exist coupon");
-//            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon1(1, companyFacade2.getCompanyId()));
-//        }
-//
-//        System.out.println("---------- CustomerFacadeTest - login with customer 2 ---------");
-//        customerFacade2 = CustomerFacadeTest.login(getCustomer2());
-//        if (customerFacade2 != null) {
-//            System.out.println("* trying to puchase noe exist coupon");
-//            CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon2(2, companyFacade2.getCompanyId()));
-//            CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon3(3, companyFacade2.getCompanyId()));
-//        }
+
+        System.out.println("---------- CustomerFacadeTest - login with customer 1 ---------");
+        customerFacade1 = CustomerFacadeTest.login(getCustomer1());
+        if (customerFacade1 != null) {
+            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon2(2, companyFacade2.getCompanyId()));
+            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon3(3, companyFacade2.getCompanyId()));
+        }
+
+        System.out.println("---------- CustomerFacadeTest - login with customer 2 ---------");
+        customerFacade2 = CustomerFacadeTest.login(getCustomer2());
+        if (customerFacade2 != null) {
+            CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon2(2, companyFacade2.getCompanyId()));
+            System.out.println("* trying to purchase no exist coupon");
+            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon1(1, companyFacade2.getCompanyId()));
+            System.out.println("* trying to purchase same coupon");
+            CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon2(2, companyFacade2.getCompanyId()));
+            System.out.println("* trying to purchase coupon with amount 0");
+            CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon3(3, companyFacade2.getCompanyId()));
+        }
 
         System.out.println("----- Main Tests END -----");
     }
