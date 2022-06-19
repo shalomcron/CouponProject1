@@ -1,11 +1,7 @@
 import beans.cliens.Company;
 import beans.cliens.Customer;
 import db.DatabaseManager;
-import exceptions.CompanyException;
-import exceptions.JDBCException;
 import facade.AdminFacadeTest;
-import facade.clients.AdminFacade;
-import facade.clients.ClientType;
 
 public class MainTest {
     public static void main(String[] args) {
@@ -15,19 +11,20 @@ public class MainTest {
         AdminFacadeTest.adminLogin();
         AdminFacadeTest.addCompany(getCompany1());
         AdminFacadeTest.addCompany(getCompany2());
+        AdminFacadeTest.addCompany(getCompany3());
 
         // try to add exist same company name
-        Company company3 = getCompany3();
-        company3.setName(getCompany1().getName());
-        AdminFacadeTest.addCompany(company3);
+        Company companyAddSameId = getCompany4();
+        companyAddSameId.setName(getCompany1().getName());
+        AdminFacadeTest.addCompany(companyAddSameId);
 
         // try to add exist same company email
-        Company company4 = getCompany3();
-        company4.setEmail(getCompany1().getEmail());
-        AdminFacadeTest.addCompany(company4);
+        Company companyAddSameEail = getCompany3();
+        companyAddSameEail.setEmail(getCompany1().getEmail());
+        AdminFacadeTest.addCompany(companyAddSameEail);
 
         // updateCompany
-        Company companyToUpdate = getCompany1();
+        Company companyToUpdate = getCompany3();
         companyToUpdate.setEmail("company5 new email");
         companyToUpdate.setPassword("company5 new assword");
         AdminFacadeTest.updateCompany(companyToUpdate.getId(), companyToUpdate);
@@ -41,7 +38,7 @@ public class MainTest {
 
         // deleteCompany
         AdminFacadeTest.addCompany(getCompany4());
-        AdminFacadeTest.deleteCompany(getCompany3());
+        AdminFacadeTest.deleteCompany(getCompany4());
 
         AdminFacadeTest.getAllCompanies();
         System.out.println("----- Main Tests END -----");
