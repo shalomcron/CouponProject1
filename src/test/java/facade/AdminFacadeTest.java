@@ -68,4 +68,40 @@ public class AdminFacadeTest {
             System.out.println("addCustomers ex:" + e);
         }
     }
+
+    public static void updateCustomer(int id, Customer customerToUpdate) {
+        try {
+            adminFacade.updateCustomer(id, customerToUpdate);
+            System.out.printf("@ updateCustomer %s finished successfully \n", customerToUpdate.getFirstName());
+        } catch (Exception e) {
+            System.out.println("updateCustomer ex:" + e);
+        }
+    }
+
+    public static void deleteCustomer(int id) {
+        try {
+            adminFacade.deleteCustomer(id);
+            System.out.printf("@ deleteCustomer %s finished successfully \n", id);
+        } catch (Exception e) {
+            System.out.println("deleteCustomer ex:" + e);
+        }
+    }
+
+    public static void getAllCustomers() {
+        System.out.println("@ getAllCustomers");
+        try {
+            adminFacade.getAllCustomers().forEach(System.out::println);
+        } catch (JDBCException e) {
+            System.out.println("getAllCustomers ex:" + e);
+        }
+    }
+    public static void getOneCustomer(int id) {
+        System.out.printf("@ getOneCustomer %s \n", id);
+        try {
+            System.out.println(adminFacade.geSingleCompany(id));
+        } catch (JDBCException e) {
+            System.out.println("getAllCustomers ex:" + e);
+        }
+    }
+
 }

@@ -2,6 +2,7 @@ import beans.cliens.Company;
 import beans.cliens.Customer;
 import db.DatabaseManager;
 import facade.AdminFacadeTest;
+import facade.CustomerFacadeTest;
 import facade.clients.CustomerFacade;
 
 public class MainTest {
@@ -51,20 +52,31 @@ public class MainTest {
         AdminFacadeTest.addCustomer(getCustomer3());
         System.out.println("* trying to add customer with exixiting email");
         Customer customerToUpdateName = getCustomer4();
-        customerToUpdateName.setEmail(getCompany1().getEmail());
+        customerToUpdateName.setEmail(getCustomer1().getEmail());
         AdminFacadeTest.addCustomer(customerToUpdateName);
 
-//        addCustomer();
-//        updateCustomer();
-//        deleteCustomer();
-//        getAllCustomers();
-//        getOneCustomer();
-
-
+        Customer customerToUpdate = getCustomer3();
+        customerToUpdate.setPassword("new password for customer 3");
+        AdminFacadeTest.updateCustomer(customerToUpdate.getId(), customerToUpdate);
+        System.out.println("* trying to update customer id");
+        Customer customerToUpdateId = getCustomer3();
+        customerToUpdateId.setId(getCustomer1().getId());
+        AdminFacadeTest.updateCustomer(getCustomer3().getId(), customerToUpdateId);
+        AdminFacadeTest.addCustomer(getCustomer4());
+        AdminFacadeTest.deleteCustomer(getCustomer4().getId());
+        AdminFacadeTest.getAllCustomers();
+        AdminFacadeTest.getOneCustomer(getCustomer1().getId());
 
         // Customers
         // login customerFacade1
         // customerFacade1 = CustomerFacade.log
+
+        System.out.println("---------- CustomerFacadeTest - login with customer 1 ---------");
+        customerFacade1 = CustomerFacadeTest.login(getCustomer1());
+        if (customerFacade1 != null) {
+            // CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon1());
+        }
+
 
         System.out.println("----- Main Tests END -----");
     }
@@ -98,6 +110,6 @@ public class MainTest {
         return new Customer(3,"customer3", "customer3Family", "customer3@gmail.com", "customer3_password");
     }
     public static Customer getCustomer4() {
-        return new Customer(3,"customer4", "customer4Family", "customer4@gmail.com", "customer4_password");
+        return new Customer(4,"customer4", "customer4Family", "customer4@gmail.com", "customer4_password");
     }
 }

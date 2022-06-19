@@ -62,6 +62,9 @@ public class CustomerDAOImpl implements CustomerDAO {
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, id);
         List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ONE, params);
+        if (rows.size() == 0) {
+            return null;
+        }
         return ResultsUtils.customerFromRow(rows.get(0));
     }
 
