@@ -90,23 +90,50 @@ public class MainTest {
             Coupon coupon3 = getCoupon3(counterCoupone++, companyId);
             CompanyFacadeTest.addCoupons(companyFacade1, coupon3);
             coupon1.setTitle("TITLE UPDATED");
-            CompanyFacadeTest.updateCoupon(companyFacade1, 1, coupon1);
-//
-//        updateCoupon();
-//        deleteCoupon();
+            CompanyFacadeTest.updateCoupon(companyFacade1, coupon1.getId(), coupon1);
+            System.out.println("* trying to update coupon id");
+            coupon1.setId(2);
+            CompanyFacadeTest.updateCoupon(companyFacade1,1, coupon1);
+            System.out.println("* trying to update coupon compant id");
+            coupon1.setId(1);
+            coupon1.setCompanyId(3);
+            CompanyFacadeTest.updateCoupon(companyFacade1, coupon1.getId(), coupon1);
+            CompanyFacadeTest.deleteCoupon(companyFacade1, coupon1.getId());
+// TODO: ADD
 //        getAllCoupons();
 //        getAllCategoryCoupons();
 //        getAllMaxPriceCoupons();
 //        getCompanyDetails();
         }
+        companyFacade2 = CompanyFacadeTest.login(getCompany2());
+        System.out.println("companyFacade2" + companyFacade2);
+        if (companyFacade2 != null) {
+            int companyId = companyFacade2.getCompanyId();
+            Coupon coupon1 = getCoupon1(counterCoupone++, companyId);
+            CompanyFacadeTest.addCoupons(companyFacade2, coupon1);
+            Coupon coupon2 = getCoupon2(counterCoupone++, companyId);
+            CompanyFacadeTest.addCoupons(companyFacade2, coupon2);
+            Coupon coupon3 = getCoupon3(counterCoupone++, companyId);
+            CompanyFacadeTest.addCoupons(companyFacade2, coupon3);
+        }
 
 
-//        System.out.println("---------- CustomerFacadeTest - login with customer 1 ---------");
-//        customerFacade1 = CustomerFacadeTest.login(getCustomer1());
-//        if (customerFacade1 != null) {
-//            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon1());
-//        }
+        System.out.println("---------- CustomerFacadeTest - login with customer 1 ---------");
+        customerFacade1 = CustomerFacadeTest.login(getCustomer1());
+        if (customerFacade1 != null) {
+            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon2(2, companyFacade2.getCompanyId()));
+            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon3(3, companyFacade2.getCompanyId()));
+            System.out.println("* trying to purchase noe exist coupon");
+            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon1(1, companyFacade2.getCompanyId()));
+        }
 
+        System.out.println("---------- CustomerFacadeTest - login with customer 2 ---------");
+        customerFacade2 = CustomerFacadeTest.login(getCustomer2());
+        if (customerFacade2 != null) {
+            System.out.println("* trying to puchase noe exist coupon");
+            CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon2(2, companyFacade2.getCompanyId()));
+            CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon3(3, companyFacade2.getCompanyId()));
+        }
 
         System.out.println("----- Main Tests END -----");
     }

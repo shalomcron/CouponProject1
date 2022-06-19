@@ -27,11 +27,22 @@ public class CompanyFacadeTest {
 
     public static void updateCoupon(CompanyFacade companyFacade, int id, Coupon coupon) {
         try {
-            System.out.printf("@ updateCoupon for company %s(%s), coupon %s \n", companyFacade.getCompanyId(), companyFacade.getCompanyName(), coupon.getTitle());
+            System.out.printf("@ updateCoupon for company %s(%s), coupon %s(%s) \n",
+                    companyFacade.getCompanyId(), companyFacade.getCompanyName(), id ,coupon.getTitle());
             companyFacade.updateCoupon(id, coupon);
             System.out.println("@ updateCoupon finished successfully");
         } catch (Exception e) {
             System.out.println("updateCoupon ex: " + e);
+        }
+    }
+
+    public static void deleteCoupon(CompanyFacade companyFacade, int couponId) {
+        try {
+            System.out.printf("@ deleteCoupon %s \n", couponId);
+            companyFacade.deleteCoupon(couponId);
+            System.out.println("@ deleteCoupon finished successfully");
+        } catch (Exception e) {
+            System.out.println("deleteCoupon ex:" + e);
         }
     }
 }

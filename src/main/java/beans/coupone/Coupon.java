@@ -30,16 +30,14 @@ public class Coupon {
         this.companyId = companyId;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Coupon(int id, int companyId, int categoryId, String title, String description, Date startDate, Date endDate, int amount, double price, String image) {
         this(companyId, categoryId, title, description, startDate, endDate, amount, price, image);
         this.id = id;
     }
-
-    public Coupon(Coupon coupon) {
-        this(coupon.getTitle(), coupon.getCategoryId(), coupon.getDescription(), coupon.getStartDate(),
-                coupon.getEndDate(), coupon.getAmount(), coupon.getPrice(), coupon.getImage());
-    }
-
 
     public int getId() {
         return id;
