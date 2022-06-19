@@ -150,7 +150,7 @@ public class MainTest {
     }
     private static Coupon getCoupon3(int couponId, int companyId) {
         return new Coupon(couponId, companyId, Category.Vacation.getId(), "טיול", "קופון 50% לטיול באירופה",
-                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), AMOUNT_COUPONS, 15, "image");
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), 1, 15, "image");
     }
 
 
