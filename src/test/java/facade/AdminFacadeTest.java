@@ -1,6 +1,7 @@
 package facade;
 
 import beans.cliens.Company;
+import exceptions.JDBCException;
 import facade.clients.AdminFacade;
 import facade.clients.ClientType;
 import facade.login.LoginManager;
@@ -30,6 +31,15 @@ public class AdminFacadeTest {
             System.out.printf("@ updateCompany %s finished successfully \n", company.getName());
         } catch (Exception e) {
             System.out.println("updateCompany ex:" + e);
+        }
+    }
+
+    public static void deleteCompany(Company company) {
+        try {
+            adminFacade.deleteCompany(company.getId());
+            System.out.printf("@ deleteCompany %s finished successfully \n", company.getName());
+        } catch (JDBCException e) {
+            System.out.println("deleteCompany ex:" + e);
         }
     }
 }

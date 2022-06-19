@@ -34,8 +34,14 @@ public class MainTest {
         // trying to update id
         companyToUpdate.setId(8);
         AdminFacadeTest.updateCompany(getCompany1().getId(), companyToUpdate);
-        // trying to update id or name
+        // trying to update name
+        companyToUpdate = getCompany1();
+        companyToUpdate.setName("bla");
+        AdminFacadeTest.updateCompany(companyToUpdate.getId(), companyToUpdate);
 
+        // deleteCompany
+        AdminFacadeTest.addCompany(getCompany3());
+        AdminFacadeTest.deleteCompany(getCompany3());
         System.out.println("----- Main Tests END -----");
     }
 
