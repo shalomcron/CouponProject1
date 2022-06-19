@@ -1,6 +1,7 @@
 package facade;
 
 import beans.cliens.Company;
+import beans.coupone.Category;
 import beans.coupone.Coupon;
 import facade.clients.ClientType;
 import facade.clients.CompanyFacade;
@@ -43,6 +44,44 @@ public class CompanyFacadeTest {
             System.out.println("@ deleteCoupon finished successfully");
         } catch (Exception e) {
             System.out.println("deleteCoupon ex:" + e);
+        }
+    }
+
+    public static void getAllCoupons(CompanyFacade companyFacade) {
+        try {
+            System.out.printf("@ getAllCoupons for company %s(%s) %s \n", companyFacade.getCompanyId(), companyFacade.getCompanyId(), companyFacade.getCompanyName());
+            companyFacade.getAllCoupons().forEach(System.out::println);
+            System.out.println("@ deleteCoupon finished successfully");
+        } catch (Exception e) {
+            System.out.println("deleteCoupon ex:" + e);
+        }
+    }
+
+    public static void getAllCategoryCoupons(CompanyFacade companyFacade, Category category) {
+        try {
+            System.out.println("@ getAllCategoryCoupons");
+            companyFacade.getAllCoupons(Category.Restaurant).forEach(System.out::println);
+        } catch (Exception e) {
+            System.out.println("getAllCategoryCoupons ex:" + e);
+        }
+    }
+
+    public static void getAllMaxPriceCoupons(CompanyFacade companyFacade, double maxPrice) {
+        try {
+            System.out.println("@ getAllMaxPriceCoupons");
+            companyFacade.getAllCoupons(maxPrice).forEach(System.out::println);
+        } catch (Exception e) {
+            System.out.println("getAllMaxPriceCoupons ex:" + e);
+        }
+    }
+
+
+    public static void getCompanyDetails(CompanyFacade companyFacade) {
+        try {
+            System.out.println("@ getCompanyDetails");
+            System.out.println(companyFacade.getCompanyDetails());
+        } catch (Exception e) {
+            System.out.println("getCompanyDetails ex:" + e);
         }
     }
 }

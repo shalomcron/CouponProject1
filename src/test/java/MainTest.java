@@ -5,7 +5,6 @@ import beans.coupone.Coupon;
 import db.DatabaseManager;
 import facade.AdminFacadeTest;
 import facade.CompanyFacadeTest;
-import facade.CustomerFacadeTest;
 import facade.clients.CompanyFacade;
 import facade.clients.CustomerFacade;
 
@@ -99,11 +98,7 @@ public class MainTest {
             coupon1.setCompanyId(3);
             CompanyFacadeTest.updateCoupon(companyFacade1, coupon1.getId(), coupon1);
             CompanyFacadeTest.deleteCoupon(companyFacade1, coupon1.getId());
-// TODO: ADD
-//        getAllCoupons();
-//        getAllCategoryCoupons();
-//        getAllMaxPriceCoupons();
-//        getCompanyDetails();
+
         }
         companyFacade2 = CompanyFacadeTest.login(getCompany2());
         System.out.println("companyFacade2" + companyFacade2);
@@ -115,32 +110,36 @@ public class MainTest {
             CompanyFacadeTest.addCoupons(companyFacade2, coupon2);
             Coupon coupon3 = getCoupon3(counterCoupone++, companyId);
             CompanyFacadeTest.addCoupons(companyFacade2, coupon3);
+            CompanyFacadeTest.getAllCoupons(companyFacade2);
+            CompanyFacadeTest.getAllCategoryCoupons(companyFacade2, Category.Restaurant);
+            CompanyFacadeTest.getAllMaxPriceCoupons(companyFacade2, 10);
+            CompanyFacadeTest.getCompanyDetails(companyFacade2);
         }
 
-
-        System.out.println("---------- CustomerFacadeTest - login with customer 1 ---------");
-        customerFacade1 = CustomerFacadeTest.login(getCustomer1());
-        if (customerFacade1 != null) {
-            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon2(2, companyFacade2.getCompanyId()));
-            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon3(3, companyFacade2.getCompanyId()));
-            System.out.println("* trying to purchase noe exist coupon");
-            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon1(1, companyFacade2.getCompanyId()));
-        }
-
-        System.out.println("---------- CustomerFacadeTest - login with customer 2 ---------");
-        customerFacade2 = CustomerFacadeTest.login(getCustomer2());
-        if (customerFacade2 != null) {
-            System.out.println("* trying to puchase noe exist coupon");
-            CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon2(2, companyFacade2.getCompanyId()));
-            CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon3(3, companyFacade2.getCompanyId()));
-        }
+//
+//        System.out.println("---------- CustomerFacadeTest - login with customer 1 ---------");
+//        customerFacade1 = CustomerFacadeTest.login(getCustomer1());
+//        if (customerFacade1 != null) {
+//            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon2(2, companyFacade2.getCompanyId()));
+//            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon3(3, companyFacade2.getCompanyId()));
+//            System.out.println("* trying to purchase noe exist coupon");
+//            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon1(1, companyFacade2.getCompanyId()));
+//        }
+//
+//        System.out.println("---------- CustomerFacadeTest - login with customer 2 ---------");
+//        customerFacade2 = CustomerFacadeTest.login(getCustomer2());
+//        if (customerFacade2 != null) {
+//            System.out.println("* trying to puchase noe exist coupon");
+//            CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon2(2, companyFacade2.getCompanyId()));
+//            CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon3(3, companyFacade2.getCompanyId()));
+//        }
 
         System.out.println("----- Main Tests END -----");
     }
 
     private static Coupon getCoupon1(int couponId, int companyId) {
         return new Coupon(couponId, companyId, Category.Food.getId(), "גבינות", "קופון 10% הנחה על גבינות השמנת",
-                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), AMOUNT_COUPONS, 10, "image");
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), AMOUNT_COUPONS, 5, "image");
     }
     private static Coupon getCoupon2(int couponId, int companyId) {
         return new Coupon(couponId, companyId, Category.Restaurant.getId(), "מסעדה", "קופון 60% למסעדה",
@@ -148,7 +147,7 @@ public class MainTest {
     }
     private static Coupon getCoupon3(int couponId, int companyId) {
         return new Coupon(couponId, companyId, Category.Vacation.getId(), "טיול", "קופון 50% לטיול באירופה",
-                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), AMOUNT_COUPONS, 10, "image");
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), AMOUNT_COUPONS, 15, "image");
     }
 
 
