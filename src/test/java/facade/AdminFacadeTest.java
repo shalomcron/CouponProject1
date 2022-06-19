@@ -42,4 +42,14 @@ public class AdminFacadeTest {
             System.out.println("deleteCompany ex:" + e);
         }
     }
+
+    public static void getAllCompanies() {
+        System.out.println("@ getAllCompanies");
+        try {
+            adminFacade.getAllCompanies().forEach(System.out::println);
+        } catch (JDBCException e) {
+            System.out.println("getAllCompanies ex:" + e);
+        }
+    }
+
 }

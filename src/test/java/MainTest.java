@@ -40,8 +40,10 @@ public class MainTest {
         AdminFacadeTest.updateCompany(companyToUpdate.getId(), companyToUpdate);
 
         // deleteCompany
-        AdminFacadeTest.addCompany(getCompany3());
+        AdminFacadeTest.addCompany(getCompany4());
         AdminFacadeTest.deleteCompany(getCompany3());
+
+        AdminFacadeTest.getAllCompanies();
         System.out.println("----- Main Tests END -----");
     }
 
@@ -56,6 +58,10 @@ public class MainTest {
 
     public static Company getCompany3() {
         return new Company(3, "company3", "company3@gmail.com", "company3_password");
+    }
+
+    public static Company getCompany4() {
+        return new Company(4, "company4", "company4@gmail.com", "company4_password");
     }
 
     public static Customer getCustomer1() {
