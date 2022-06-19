@@ -8,6 +8,7 @@ import exceptions.JDBCException;
 import exceptions.PurchaseCouponMsg;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class CustomerFacade extends ClientFacade {
     private int customerId;
@@ -37,7 +38,7 @@ public class CustomerFacade extends ClientFacade {
 
     public void purchaseCoupon(int couponId) throws JDBCException, CouponException {
         Coupon coupon = couponDAO.getSingle(couponId);
-        if (couponsCustomersDAO.couponWasPurchased(getCustomerId(), couponId)) {
+        if (couponsCustomersDAO.isCouponWasPurchased(getCustomerId(), couponId)) {
             throw new CouponException(PurchaseCouponMsg.COUPON_WAS_ALREADY_PURCHASED);
         }
         if (coupon == null) {
@@ -53,7 +54,9 @@ public class CustomerFacade extends ClientFacade {
         }
         couponsCustomersDAO.purchaseCoupon(new CouponsCustomer(getCustomerId(), couponId));
         coupon.setAmount(coupon.getAmount() -1);
-        couponDAO.update(coupon.getId(), coupon);
     }
 
+    public List<Coupon> getPurchasedCoupons(int customerId) throws JDBCException {
+        return couponsCustomersDAO.getAllPurchases(customerId);
+    }
 }

@@ -1,5 +1,6 @@
 package dao.couponsCustomers;
 
+import beans.coupone.Coupon;
 import beans.couponsCustomer.CouponsCustomer;
 import db.JDBCUtils;
 import db.ResultsUtils;
@@ -35,6 +36,11 @@ public class CouponsCustomersDAOImpl implements CouponsCustomersDAO {
 
     private static final String QUERY_DELETE = "DELETE FROM `coupone-bhp-386`.coupons_customers " +
             " WHERE ID_CUSTOMER=? AND ID_COUPON=?";
+
+    private static final String QUERY_GET_ALL_PURCHASED = "SELECT * FROM" +
+            " `coupone-bhp-386`.coupons_customers as cc," +
+            " `coupone-bhp-386`.coupons as c" +
+            " where cc.ID_COUPON = c.ID and ID_CUSTOMER = ?;";
 
     @Override
     public void purchaseCoupon(CouponsCustomer couponsCustomer) throws JDBCException {
@@ -72,10 +78,22 @@ public class CouponsCustomersDAOImpl implements CouponsCustomersDAO {
     }
 
     @Override
-    public boolean couponWasPurchased(int customerId, int couponId) throws JDBCException {
+    public boolean isCouponWasPurchased(int customerId, int couponId) throws JDBCException {
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, customerId);
         params.put(2, couponId);
         return ResultsUtils.isExistFromRow(JDBCUtils.executeQueryWithResults(QUERY_COUPON_WAS_ALREADY_PURCHASED, params).get(0));
+    }
+
+    @Override
+    public List<Coupon> getAllPurchases(int customerId) throws JDBCException {
+        List<Coupon> results = new ArrayList<>();
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, customerId);
+        List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ALL_PURCHASED, params);
+        for (Map<String, Object> object : rows) {
+            results.add(ResultsUtils.couponFromRow(object));
+        }
+        return results;
     }
 }

@@ -135,6 +135,7 @@ public class MainTest {
             CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon2(2, companyFacade2.getCompanyId()));
             System.out.println("* trying to purchase coupon with amount 0");
             CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon3(3, companyFacade2.getCompanyId()));
+            CustomerFacadeTest.getPurchasedCoupons(customerFacade2);
         }
 
         System.out.println("----- Main Tests END -----");

@@ -2,6 +2,7 @@ package dao.couponsCustomers;
 
 // extends DAO<CouponsCustomer, Integer>
 
+import beans.coupone.Coupon;
 import beans.couponsCustomer.CouponsCustomer;
 import exceptions.JDBCException;
 
@@ -17,5 +18,7 @@ public interface CouponsCustomersDAO {
 
     void deletePurchase(int couponId, int customerId) throws JDBCException;
 
-    boolean couponWasPurchased(int customerId, int couponId) throws JDBCException;
+    boolean isCouponWasPurchased(int customerId, int couponId) throws JDBCException;
+
+    List<Coupon> getAllPurchases(int customerId) throws JDBCException;
 }
