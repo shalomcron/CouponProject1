@@ -23,4 +23,13 @@ public class AdminFacadeTest {
             }
         }
     }
+
+    public static void updateCompany(int id, Company company) {
+        try {
+            adminFacade.updateCompany(id, company);
+            System.out.printf("@ updateCompany %s finished successfully \n", company.getName());
+        } catch (Exception e) {
+            System.out.println("updateCompany ex:" + e);
+        }
+    }
 }

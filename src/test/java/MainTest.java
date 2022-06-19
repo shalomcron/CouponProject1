@@ -15,14 +15,27 @@ public class MainTest {
         AdminFacadeTest.adminLogin();
         AdminFacadeTest.addCompany(getCompany1());
         AdminFacadeTest.addCompany(getCompany2());
+
         // try to add exist same company name
         Company company3 = getCompany3();
         company3.setName(getCompany1().getName());
         AdminFacadeTest.addCompany(company3);
+
         // try to add exist same company email
         Company company4 = getCompany3();
         company4.setEmail(getCompany1().getEmail());
         AdminFacadeTest.addCompany(company4);
+
+        // updateCompany
+        Company companyToUpdate = getCompany1();
+        companyToUpdate.setEmail("company5 new email");
+        companyToUpdate.setPassword("company5 new assword");
+        AdminFacadeTest.updateCompany(companyToUpdate.getId(), companyToUpdate);
+        // trying to update id
+        companyToUpdate.setId(8);
+        AdminFacadeTest.updateCompany(getCompany1().getId(), companyToUpdate);
+        // trying to update id or name
+
         System.out.println("----- Main Tests END -----");
     }
 

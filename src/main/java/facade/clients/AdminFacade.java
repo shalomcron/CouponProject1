@@ -23,11 +23,11 @@ public class AdminFacade extends ClientFacade {
     }
 
     public void updateCompany(int id, Company companyToUpdate) throws JDBCException, CompanyException {
-        Company companyDromDB = companyDAO.getSingle(id);
-        if (companyDromDB == null) {
+        Company companyFromDB = companyDAO.getSingle(id);
+        if (companyFromDB == null) {
             throw new CompanyException(CompanyMsg.COMPANY_NOT_EXIST);
         }
-        if (!companyDromDB.getName().equals(companyToUpdate.getName())) {
+        if (!companyFromDB.getName().equals(companyToUpdate.getName())) {
             throw new CompanyException(CompanyMsg.COMPANY_NAME_CANNOT_BE_UPDATED);
         }
         if (id != companyToUpdate.getId()) {
