@@ -114,7 +114,6 @@ public class DatabaseManager {
         for (Category c: Category.values()) {
             try {
                 categoryDAO.add(c);
-                System.out.println("@ insertCategories finished successfully");
             } catch (JDBCException e) {
                 System.out.println("insertCategories ex:" + e);
             }

@@ -1,7 +1,10 @@
 import beans.cliens.Company;
 import beans.cliens.Customer;
 import db.DatabaseManager;
+import exceptions.CompanyException;
+import exceptions.JDBCException;
 import facade.clients.AdminFacade;
+import facade.clients.ClientType;
 import facade.clients.CompanyFacade;
 import facade.clients.CustomerFacade;
 import facade.login.LoginManager;
@@ -22,12 +25,26 @@ public class MainTest {
         System.out.println("----- Main Tests START -----");
         System.out.println("---------- dropCreateStrategy ---------");
         DatabaseManager.getInstance().dropCreateStrategy();
-        adminFacade = adminLogin();
+        adminLogin();
+        addCompany(company1);
+        addCompany(company2);
+
         System.out.println("----- Main Tests END -----");
     }
 
-    private static AdminFacade adminLogin() {
+    private static void addCompany(Company company1) {
+        if (adminFacade != null) {
+            try {
+                adminFacade.addCompany(company1);
+                System.out.printf("@ addCompany %s finished successfully \n", company1.getName());
+            } catch (Exception e) {
+                System.out.println("addCustomers ex:" + e);
+            }
+        }
+    }
 
+    private static void adminLogin() {
+        adminFacade = (AdminFacade) loginManager.login("admin@admin.com", "admin", ClientType.Admin);
     }
 
 }
