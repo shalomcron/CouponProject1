@@ -1,6 +1,7 @@
 package facade;
 
 import beans.cliens.Customer;
+import beans.coupone.Category;
 import beans.coupone.Coupon;
 import facade.clients.ClientType;
 import facade.clients.CustomerFacade;
@@ -27,6 +28,15 @@ public class CustomerFacadeTest {
         System.out.printf("@ showPurchasedCouponsfor customer %s(%s) \n", customerFacade.getCustomerId(), customerFacade.getCustomerName());
         try {
             customerFacade.getPurchasedCoupons(customerFacade.getCustomerId()).forEach(System.out::println);
+        } catch (Exception e) {
+            System.out.println("getPurchasedCoupons ex:" + e);
+        }
+    }
+
+    public static void getPurchasedCoupons(CustomerFacade customerFacade, Category category) {
+        System.out.printf("@ getPurchasedCoupons customer %s(%s) cateory:%s \n", customerFacade.getCustomerId(), customerFacade.getCustomerName(), category.name());
+        try {
+            customerFacade.getPurchasedCoupons(customerFacade.getCustomerId(), category.getId()).forEach(System.out::println);
         } catch (Exception e) {
             System.out.println("getPurchasedCoupons ex:" + e);
         }

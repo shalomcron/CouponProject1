@@ -42,6 +42,11 @@ public class CouponsCustomersDAOImpl implements CouponsCustomersDAO {
             " `coupone-bhp-386`.coupons as c" +
             " where cc.ID_COUPON = c.ID and ID_CUSTOMER = ?;";
 
+    private static final String QUERY_GET_ALL_PURCHASED_CATEGORY = "SELECT * FROM" +
+            " `coupone-bhp-386`.coupons_customers as cc," +
+            " `coupone-bhp-386`.coupons as c" +
+            " where cc.ID_COUPON = c.ID and ID_CUSTOMER=? AND c.ID_CATEGORY = ? ;";
+
     @Override
     public void purchaseCoupon(CouponsCustomer couponsCustomer) throws JDBCException {
         Map<Integer, Object> params = new HashMap<>();
@@ -91,6 +96,19 @@ public class CouponsCustomersDAOImpl implements CouponsCustomersDAO {
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, customerId);
         List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ALL_PURCHASED, params);
+        for (Map<String, Object> object : rows) {
+            results.add(ResultsUtils.couponFromRow(object));
+        }
+        return results;
+    }
+
+    @Override
+    public Iterable<Coupon> getPurchasedCoupons(int customerId, int categoryId) throws JDBCException {
+        List<Coupon> results = new ArrayList<>();
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, customerId);
+        params.put(2, categoryId);
+        List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_ALL_PURCHASED_CATEGORY, params);
         for (Map<String, Object> object : rows) {
             results.add(ResultsUtils.couponFromRow(object));
         }

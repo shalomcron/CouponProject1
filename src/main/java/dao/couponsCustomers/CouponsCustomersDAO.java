@@ -21,4 +21,6 @@ public interface CouponsCustomersDAO {
     boolean isCouponWasPurchased(int customerId, int couponId) throws JDBCException;
 
     List<Coupon> getAllPurchases(int customerId) throws JDBCException;
+
+    Iterable<Coupon> getPurchasedCoupons(int customerId, int customerId1) throws JDBCException;
 }

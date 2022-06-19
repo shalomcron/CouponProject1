@@ -59,4 +59,8 @@ public class CustomerFacade extends ClientFacade {
     public List<Coupon> getPurchasedCoupons(int customerId) throws JDBCException {
         return couponsCustomersDAO.getAllPurchases(customerId);
     }
+
+    public Iterable<Coupon> getPurchasedCoupons(int customerId, int categoryId) throws JDBCException {
+        return couponsCustomersDAO.getPurchasedCoupons(customerId, categoryId);
+    }
 }
