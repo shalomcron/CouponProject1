@@ -15,7 +15,6 @@ import java.time.temporal.ChronoUnit;
 
 public class MainTest {
     private static final int AMOUNT_COUPONS = 2;
-    private static int counterCoupone = 1;
     private static CompanyFacade companyFacade1, companyFacade2;
     private static CustomerFacade customerFacade1, customerFacade2;
 
@@ -83,11 +82,11 @@ public class MainTest {
         System.out.println("companyFacade1" + companyFacade1);
         if (companyFacade1 != null) {
             int companyId = companyFacade1.getCompanyId();
-            Coupon coupon1 = getCoupon1(counterCoupone++, companyId);
+            Coupon coupon1 = getCoupon1(1, companyId);
             CompanyFacadeTest.addCoupons(companyFacade1, coupon1);
-            Coupon coupon2 = getCoupon2(counterCoupone++, companyId);
+            Coupon coupon2 = getCoupon2(2, companyId);
             CompanyFacadeTest.addCoupons(companyFacade1, coupon2);
-            Coupon coupon3 = getCoupon3(counterCoupone++, companyId);
+            Coupon coupon3 = getCoupon3(3, companyId);
             CompanyFacadeTest.addCoupons(companyFacade1, coupon3);
             coupon1.setTitle("TITLE UPDATED");
             CompanyFacadeTest.updateCoupon(companyFacade1, coupon1.getId(), coupon1);
@@ -105,18 +104,17 @@ public class MainTest {
         System.out.println("companyFacade2" + companyFacade2);
         if (companyFacade2 != null) {
             int companyId = companyFacade2.getCompanyId();
-            Coupon coupon1 = getCoupon1(counterCoupone++, companyId);
+            Coupon coupon1 = getCoupon1(4, companyId);
             CompanyFacadeTest.addCoupons(companyFacade2, coupon1);
-            Coupon coupon2 = getCoupon2(counterCoupone++, companyId);
+            Coupon coupon2 = getCoupon2(5, companyId);
             CompanyFacadeTest.addCoupons(companyFacade2, coupon2);
-            Coupon coupon3 = getCoupon3(counterCoupone++, companyId);
+            Coupon coupon3 = getCoupon3(6, companyId);
             CompanyFacadeTest.addCoupons(companyFacade2, coupon3);
             CompanyFacadeTest.getAllCoupons(companyFacade2);
             CompanyFacadeTest.getAllCategoryCoupons(companyFacade2, Category.Restaurant);
             CompanyFacadeTest.getAllMaxPriceCoupons(companyFacade2, 10);
             CompanyFacadeTest.getCompanyDetails(companyFacade2);
         }
-
 
         System.out.println("---------- CustomerFacadeTest - login with customer 1 ---------");
         customerFacade1 = CustomerFacadeTest.login(getCustomer1());
@@ -128,10 +126,8 @@ public class MainTest {
         System.out.println("---------- CustomerFacadeTest - login with customer 2 ---------");
         customerFacade2 = CustomerFacadeTest.login(getCustomer2());
         if (customerFacade2 != null) {
-            CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon2(2, companyFacade2.getCompanyId()));
             System.out.println("* trying to purchase no exist coupon");
-            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon1(1, companyFacade2.getCompanyId()));
-            System.out.println("* trying to purchase same coupon");
+            CustomerFacadeTest.purchaseCoupon(customerFacade1, getCoupon1(10, companyFacade2.getCompanyId()));
             CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon2(2, companyFacade2.getCompanyId()));
             System.out.println("* trying to purchase coupon with amount 0");
             CustomerFacadeTest.purchaseCoupon(customerFacade2, getCoupon3(3, companyFacade2.getCompanyId()));

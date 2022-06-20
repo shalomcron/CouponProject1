@@ -54,6 +54,7 @@ public class CustomerFacade extends ClientFacade {
         }
         couponsCustomersDAO.purchaseCoupon(new CouponsCustomer(getCustomerId(), couponId));
         coupon.setAmount(coupon.getAmount() -1);
+        couponDAO.update(couponId, coupon);
     }
 
     public List<Coupon> getPurchasedCoupons(int customerId) throws JDBCException {
