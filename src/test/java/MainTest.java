@@ -8,6 +8,7 @@ import facade.CompanyFacadeTest;
 import facade.CustomerFacadeTest;
 import facade.clients.CompanyFacade;
 import facade.clients.CustomerFacade;
+import jobs.DeleteExpiredCoupons;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -135,8 +136,16 @@ public class MainTest {
             CustomerFacadeTest.getPurchasedCoupons(customerFacade2, Category.Vacation);
         }
 
-        System.out.println("---------- set ---------");
+        System.out.println("---------- DeleteExpiredCoupons ---------");
+        DeleteExpiredCoupons deleteExpiredCoupons = new DeleteExpiredCoupons();
+        new Thread(deleteExpiredCoupons).start();
 
+
+        // simulate program running
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {}
+        deleteExpiredCoupons.stop();
         System.out.println("----- Main Tests END -----");
     }
 
@@ -146,7 +155,7 @@ public class MainTest {
     }
     private static Coupon getCoupon2(int couponId, int companyId) {
         return new Coupon(couponId, companyId, Category.Restaurant.getId(), "מסעדה", "קופון 60% למסעדה",
-                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), AMOUNT_COUPONS, 10, "image");
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().minus(1, ChronoUnit.MONTHS)), AMOUNT_COUPONS, 10, "image");
     }
     private static Coupon getCoupon3(int couponId, int companyId) {
         return new Coupon(couponId, companyId, Category.Vacation.getId(), "טיול", "קופון 50% לטיול באירופה",

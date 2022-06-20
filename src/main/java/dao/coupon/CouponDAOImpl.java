@@ -31,6 +31,8 @@ public class CouponDAOImpl implements CouponDAO {
             "SET `ID_COMPANY` = ?, `ID_CATEGORY` = ?, `TITLE` = ?, `DESCRIPTION` = ?, " +
             "`DATE_START` = ?, `DATE_END` = ?, `AMOUNT` = ?, `PRICE` = ?, `IMAGE` = ? WHERE (`ID` = ?);";
     private static final String QUERY_DELETE = "DELETE FROM `coupone-bhp-386`.`coupons` WHERE (`ID` = ?)";
+    private static final String QUERY_DELETE_EXPIRED_COUPONS = "DELETE FROM `coupone-bhp-386`.`coupons`" +
+            " WHERE ID>0 AND DATE_END < CURDATE()"; // to avoid error: 1175. You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column
 
     private static final String QUERY_IS_EXIST_BY_TITLE = "select exists (SELECT * FROM `coupone-bhp-386`.coupons " +
             "WHERE (`ID_COMPANY` = ? and `TITLE` = ?) ) as RES;";
@@ -103,6 +105,11 @@ public class CouponDAOImpl implements CouponDAO {
             results.add(ResultsUtils.couponFromRow(object));
         }
         return results;
+    }
+
+    @Override
+    public void deleteExpiredCoupons() throws JDBCException {
+        JDBCUtils.executeQuery(QUERY_DELETE_EXPIRED_COUPONS);
     }
 
     @Override
