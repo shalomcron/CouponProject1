@@ -17,7 +17,7 @@ public class CustomerFacadeTest {
     public static void purchaseCoupon(CustomerFacade customerFacade, Coupon coupon) {
         try {
             System.out.printf("@ purchaseCoupon %s for customer %s(%s) \n", coupon.getTitle(), customerFacade.getCustomerId(), customerFacade.getCustomerName());
-            customerFacade.purchaseCoupon(coupon.getId());
+            customerFacade.purchaseCoupon(coupon.getId(), coupon.getCompanyId());
             System.out.println("@ purchaseCoupon finished successfully");
         } catch (Exception e) {
             System.out.println("purchaseCoupon ex:" + e);

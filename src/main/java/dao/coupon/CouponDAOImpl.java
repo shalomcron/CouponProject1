@@ -1,6 +1,5 @@
 package dao.coupon;
 
-import beans.coupone.Category;
 import beans.coupone.Coupon;
 import db.JDBCUtils;
 import db.ResultsUtils;
@@ -19,18 +18,28 @@ public class CouponDAOImpl implements CouponDAO {
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String QUERY_GET_ALL = "SELECT * FROM `coupone-bhp-386`.coupons";
+
     private static final String QUERY_GET_COMPANY_COUPONS = "SELECT * FROM `coupone-bhp-386`.coupons " +
             "WHERE (ID_COMPANY = ?) ORDER BY ID";
+
     private static final String QUERY_GET_COMPANY_COUPONS_CATEGORY = "SELECT * FROM `coupone-bhp-386`.coupons " +
             "WHERE (ID_COMPANY = ? AND ID_CATEGORY = ?) ORDER BY ID";
+
     private static final String QUERY_GET_COMPANY_COUPONS_MAX_PRICE = "SELECT * FROM `coupone-bhp-386`.coupons " +
             "WHERE (ID_COMPANY = ? AND PRICE <= ?) ORDER BY ID";
     private static final String QUERY_GET_ONE = "SELECT * FROM `coupone-bhp-386`.coupons WHERE id=?";
 
+    private static final String QUERY_GET_COUPON_COMPANY = "SELECT * FROM `coupone-bhp-386`.coupons WHERE ID=? AND ID_COMPANY = ?";
+
     private static final String QUERY_UPDATE = "UPDATE `coupone-bhp-386`.`coupons` " +
             "SET `ID_COMPANY` = ?, `ID_CATEGORY` = ?, `TITLE` = ?, `DESCRIPTION` = ?, " +
             "`DATE_START` = ?, `DATE_END` = ?, `AMOUNT` = ?, `PRICE` = ?, `IMAGE` = ? WHERE (`ID` = ?);";
+
+    private static final String QUERY_REDUCE_AMOUT_COUPONE_OMPANY = "UPDATE `coupone-bhp-386`.`coupons` " +
+            "SET `AMOUNT` = ? WHERE ID=? AND ID_COMPANY = ?";
+
     private static final String QUERY_DELETE = "DELETE FROM `coupone-bhp-386`.`coupons` WHERE (`ID` = ?)";
+
     private static final String QUERY_DELETE_EXPIRED_COUPONS = "DELETE FROM `coupone-bhp-386`.`coupons`" +
             " WHERE ID>0 AND DATE_END < CURDATE()"; // to avoid error: 1175. You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column
 
@@ -121,6 +130,15 @@ public class CouponDAOImpl implements CouponDAO {
     }
 
     @Override
+    public Coupon getCouponCompany(int couponId, int companyId) throws JDBCException {
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, couponId);
+        params.put(2, companyId);
+        List<Map<String, Object>> rows = JDBCUtils.executeQueryWithResults(QUERY_GET_COUPON_COMPANY, params);
+        return rows.size() > 0 ? ResultsUtils.couponFromRow(rows.get(0)): null;
+    }
+
+    @Override
     public void update(Integer id, Coupon coupon) throws JDBCException {
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, coupon.getCompanyId());
@@ -134,6 +152,16 @@ public class CouponDAOImpl implements CouponDAO {
         params.put(9, coupon.getImage());
         params.put(10, id);
         JDBCUtils.executeQuery(QUERY_UPDATE, params);
+    }
+
+    @Override
+    public void reduceAmountCouponCompany(int couponId, int companyId, Coupon coupon) throws JDBCException {
+        int amount = coupon.getAmount() -1;
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, amount);
+        params.put(2, couponId);
+        params.put(3, companyId);
+        JDBCUtils.executeQuery(QUERY_REDUCE_AMOUT_COUPONE_OMPANY, params);
     }
 
     @Override

@@ -45,8 +45,6 @@ public class AdminFacade extends ClientFacade {
     }
 
     public void deleteCompany(int id) throws JDBCException {
-        // TODO: delete company coupon
-        // TODO: delete customers coupon
         companyDAO.delete(id);
     }
 
