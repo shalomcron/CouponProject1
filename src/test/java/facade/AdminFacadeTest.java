@@ -5,7 +5,7 @@ import beans.cliens.Customer;
 import exceptions.JDBCException;
 import facade.clients.AdminFacade;
 import facade.clients.ClientType;
-import facade.login.LoginManager;
+import login.LoginManager;
 
 public class AdminFacadeTest {
     private static final LoginManager loginManager = LoginManager.getInstance();

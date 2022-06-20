@@ -5,8 +5,7 @@ import beans.coupone.Category;
 import beans.coupone.Coupon;
 import facade.clients.ClientType;
 import facade.clients.CompanyFacade;
-import facade.clients.CustomerFacade;
-import facade.login.LoginManager;
+import login.LoginManager;
 
 public class CompanyFacadeTest {
     private static final LoginManager loginManager = LoginManager.getInstance();

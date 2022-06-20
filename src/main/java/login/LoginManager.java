@@ -1,4 +1,4 @@
-package facade.login;
+package login;
 
 import exceptions.LoginException;
 import facade.clients.AdminFacade;

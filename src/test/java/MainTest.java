@@ -135,6 +135,8 @@ public class MainTest {
             CustomerFacadeTest.getPurchasedCoupons(customerFacade2, Category.Vacation);
         }
 
+        System.out.println("---------- set ---------");
+
         System.out.println("----- Main Tests END -----");
     }
 
