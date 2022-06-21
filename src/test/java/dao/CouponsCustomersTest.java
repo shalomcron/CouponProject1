@@ -15,10 +15,10 @@ public class CouponsCustomersTest {
         purchaseCoupon();
         getAllPurchases();
         getSinglePurchase();
-        deletePurchase();
+        deleteCouponCustomerPurchase();
     }
 
-    private static void deletePurchase() {
+    private static void deleteCouponCustomerPurchase() {
         try {
             couponsCustomersDAO.deleteCouponCustomerPurchase(1, 1);
             System.out.println("@ deletePurchase finished successfully");
