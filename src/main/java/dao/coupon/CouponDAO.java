@@ -20,4 +20,6 @@ public interface CouponDAO extends DAO<Coupon, Integer> {
     Coupon getCouponCompany(int couponId, int companyId) throws JDBCException;
 
     void reduceAmountCouponCompany(int couponId, int companyId, Coupon coupon) throws JDBCException;
+
+    void deleteCompanyCoupons(int companyId) throws JDBCException;
 }

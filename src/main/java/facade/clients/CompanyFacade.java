@@ -51,7 +51,7 @@ public class CompanyFacade extends ClientFacade {
     }
 
     public void deleteCoupon(int couponId) throws JDBCException {
-        couponsCustomersDAO.deleteCouponCustomerPurchase(couponId);
+        couponsCustomersDAO.deleteCouponPurchases(couponId);
         couponDAO.delete(couponId);
     }
 

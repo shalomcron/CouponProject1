@@ -16,9 +16,9 @@ public interface CouponsCustomersDAO {
 
     CouponsCustomer getSinglePurchase(int couponId, int customerId) throws JDBCException;
 
-    void deleteCouponCustomerPurchase(int couponId, int customerId) throws JDBCException;
+    void deleteCouponPurchases(int couponId, int customerId) throws JDBCException;
 
-    void deleteCouponCustomerPurchase(int couponId) throws JDBCException;
+    void deleteCouponPurchases(int couponId) throws JDBCException;
 
     void deleteCustomerPurchase(int customerId) throws JDBCException;
 
