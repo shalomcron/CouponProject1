@@ -44,8 +44,11 @@ public class AdminFacade extends ClientFacade {
         return customerDAO.getSingle(email, password);
     }
 
-    public void deleteCompany(int id) throws JDBCException {
-        companyDAO.delete(id);
+    public void deleteCompany(int companyId) throws JDBCException {
+        // couponsCustomersDAO.de
+        // TODO: delete all company coupons
+        // TODO: delete all customs purchase
+        companyDAO.delete(companyId);
     }
 
     public List<Company> getAllCompanies() throws JDBCException {

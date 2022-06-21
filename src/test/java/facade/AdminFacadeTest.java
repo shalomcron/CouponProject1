@@ -36,8 +36,6 @@ public class AdminFacadeTest {
 
     public static void deleteCompany(Company company) {
         try {
-            // TODO: delete company coupon
-            // TODO: delete customers coupon
             adminFacade.deleteCompany(company.getId());
             System.out.printf("@ deleteCompany %s finished successfully \n", company.getName());
         } catch (JDBCException e) {
