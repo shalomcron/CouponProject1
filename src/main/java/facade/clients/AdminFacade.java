@@ -50,13 +50,10 @@ public class AdminFacade extends ClientFacade {
         // delete all customers company purchases
         List<Coupon> coupons = couponDAO.getAllCompanyCoupons(companyId);
         for (Coupon coupon: coupons) {
-            System.out.println("coupon:" + coupon);
             couponsCustomersDAO.deleteCouponPurchases(coupon.getId());
         }
-        // couponsCustomersDAO.de
-        // TODO: delete all company coupons
+        // delete all company coupons
         couponDAO.deleteCompanyCoupons(companyId);
-        // TODO: delete all customs purchase
         companyDAO.delete(companyId);
     }
 

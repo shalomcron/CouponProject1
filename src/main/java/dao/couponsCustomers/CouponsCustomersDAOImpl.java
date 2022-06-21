@@ -39,7 +39,7 @@ public class CouponsCustomersDAOImpl implements CouponsCustomersDAO {
     private static final String QUERY_DELETE_CUSTOMER_PURCASE = "DELETE FROM `coupone-bhp-386`.coupons_customers " +
             " WHERE ID_CUSTOMER=?";
     private static final String QUERY_DELETE_COUPON_PURCASE = "DELETE FROM `coupone-bhp-386`.coupons_customers " +
-            " WHERE ID_CUSTOMER=?";
+            " WHERE ID_COUPON=?";
 
     private static final String QUERY_GET_ALL_PURCHASED = "SELECT * FROM" +
             " `coupone-bhp-386`.coupons_customers as cc," +
