@@ -135,8 +135,8 @@ public class MainTest {
             System.out.println("* trying to purchase no exist coupon");
             CustomerFacadeTest.purchaseCoupon(customerFacade2, getCouponNotExist());
 
-            System.out.println("* trying to purchase coupon with amount 0");
-            // "Company 1 Coupon 1" was purchased by customer 1
+            System.out.println("* trying to purchase coupon with amount 0 \n " +
+                    "       'Company 1 Coupon 1' was purchased by customer 1");
             CustomerFacadeTest.purchaseCoupon(customerFacade2, getCompany1Coupon1(companyFacade1.getCompanyId()));
         }
 
