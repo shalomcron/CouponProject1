@@ -79,7 +79,7 @@ public class CouponsCustomersDAOImpl implements CouponsCustomersDAO {
     }
 
     @Override
-    public void deletePurchase(int couponId, int customerId) throws JDBCException {
+    public void deleteCouponCustomerPurchase(int couponId, int customerId) throws JDBCException {
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, couponId);
         params.put(2, customerId);
@@ -94,7 +94,7 @@ public class CouponsCustomersDAOImpl implements CouponsCustomersDAO {
     }
 
     @Override
-    public void deletePurchase(int couponId) throws JDBCException {
+    public void deleteCouponCustomerPurchase(int couponId) throws JDBCException {
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, couponId);
         JDBCUtils.executeQuery(QUERY_DELETE_COUPON_PURCASE, params);

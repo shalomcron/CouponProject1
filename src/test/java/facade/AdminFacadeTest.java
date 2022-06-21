@@ -11,8 +11,9 @@ public class AdminFacadeTest {
     private static final LoginManager loginManager = LoginManager.getInstance();
     private static AdminFacade adminFacade = null;
 
-    public static void adminLogin() {
+    public static AdminFacade adminLogin() {
         adminFacade = (AdminFacade) loginManager.login("admin@admin.com", "admin", ClientType.Admin);
+        return adminFacade;
     }
 
     public static void addCompany(Company company1) {

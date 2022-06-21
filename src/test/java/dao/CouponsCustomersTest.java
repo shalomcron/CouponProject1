@@ -20,7 +20,7 @@ public class CouponsCustomersTest {
 
     private static void deletePurchase() {
         try {
-            couponsCustomersDAO.deletePurchase(1, 1);
+            couponsCustomersDAO.deleteCouponCustomerPurchase(1, 1);
             System.out.println("@ deletePurchase finished successfully");
         } catch (Exception e) {
             System.out.println("deletePurchase ex:" + e);

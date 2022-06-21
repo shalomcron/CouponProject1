@@ -6,6 +6,7 @@ import db.DatabaseManager;
 import facade.AdminFacadeTest;
 import facade.CompanyFacadeTest;
 import facade.CustomerFacadeTest;
+import facade.clients.AdminFacade;
 import facade.clients.CompanyFacade;
 import facade.clients.CustomerFacade;
 import jobs.DeleteExpiredCoupons;
@@ -24,10 +25,12 @@ public class MainTest {
         System.out.println("---------- dropCreateStrategy ---------");
         DatabaseManager.getInstance().dropCreateStrategy();
         System.out.println("---------- AdminFacadeTest - Company ---------");
-        AdminFacadeTest.adminLogin();
-        AdminFacadeTest.addCompany(getCompany1());
-        AdminFacadeTest.addCompany(getCompany2());
-        AdminFacadeTest.addCompany(getCompany3());
+        AdminFacade adminFacade = AdminFacadeTest.adminLogin();
+        if (adminFacade != null) {
+            AdminFacadeTest.addCompany(getCompany1());
+            AdminFacadeTest.addCompany(getCompany2());
+            AdminFacadeTest.addCompany(getCompany3());
+        }
 
         System.out.println("* try to add exist same company name");
         Company companyAddSameId = getCompany4();
