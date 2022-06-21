@@ -46,7 +46,6 @@ public class AdminFacade extends ClientFacade {
     }
 
     public void deleteCompany(int companyId) throws JDBCException {
-        System.out.println("*** companyId:" + companyId);
         // delete all customers company purchases
         List<Coupon> coupons = couponDAO.getAllCompanyCoupons(companyId);
         for (Coupon coupon: coupons) {

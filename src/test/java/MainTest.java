@@ -146,8 +146,8 @@ public class MainTest {
 
         System.out.println("delete tests");
         AdminFacadeTest.deleteCompany(getCompany1());
-//        CompanyFacadeTest.deleteCoupon(companyFacade1, getCompany1Coupon1(companyFacade1.getCompanyId()).getId());
-//        AdminFacadeTest.deleteCustomer(getCustomer2().getId());
+        CompanyFacadeTest.deleteCoupon(companyFacade1, getCompany1Coupon1(companyFacade1.getCompanyId()).getId());
+        AdminFacadeTest.deleteCustomer(getCustomer2().getId());
 
         System.out.println("---------- DeleteExpiredCoupons ---------");
         DeleteExpiredCoupons deleteExpiredCoupons = new DeleteExpiredCoupons();
