@@ -143,7 +143,7 @@ public class MainTest {
 
         System.out.println("delete tests");
         AdminFacadeTest.deleteCompany(getCompany4());
-//        CompanyFacadeTest.deleteCoupon(companyFacade1, getCompany1Coupon1(companyFacade1.getCompanyId()).getId());
+        CompanyFacadeTest.deleteCoupon(companyFacade1, getCompany1Coupon1(companyFacade1.getCompanyId()).getId());
 //        AdminFacadeTest.deleteCustomer(getCustomer1().getId());
 
         System.out.println("---------- DeleteExpiredCoupons ---------");

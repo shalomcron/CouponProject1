@@ -50,9 +50,9 @@ public class CompanyFacade extends ClientFacade {
         couponDAO.update(id, couponToUpdate);
     }
 
-    public void deleteCoupon(int id) throws JDBCException {
-        // TODO: DELETE CUSTOMERS COUPONS
-        couponDAO.delete(id);
+    public void deleteCoupon(int couponId) throws JDBCException {
+        couponsCustomersDAO.deletePurchase(couponId);
+        couponDAO.delete(couponId);
     }
 
     public List<Coupon> getAllCoupons() throws JDBCException {

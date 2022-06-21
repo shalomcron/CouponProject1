@@ -34,8 +34,10 @@ public class CouponsCustomersDAOImpl implements CouponsCustomersDAO {
     private static final String QUERY_COUPON_WAS_ALREADY_PURCHASED = "select exists " +
             "(SELECT * FROM `coupone-bhp-386`.coupons_customers WHERE ID_CUSTOMER=? AND ID_COUPON=?) as RES;";
 
-    private static final String QUERY_DELETE = "DELETE FROM `coupone-bhp-386`.coupons_customers " +
+    private static final String QUERY_DELETE_CUSTOMER_PURCASE = "DELETE FROM `coupone-bhp-386`.coupons_customers " +
             " WHERE ID_CUSTOMER=? AND ID_COUPON=?";
+    private static final String QUERY_DELETE_COUPON_PURCASE = "DELETE FROM `coupone-bhp-386`.coupons_customers " +
+            " WHERE ID_CUSTOMER=?";
 
     private static final String QUERY_GET_ALL_PURCHASED = "SELECT * FROM" +
             " `coupone-bhp-386`.coupons_customers as cc," +
@@ -79,7 +81,14 @@ public class CouponsCustomersDAOImpl implements CouponsCustomersDAO {
         Map<Integer, Object> params = new HashMap<>();
         params.put(1, couponId);
         params.put(2, customerId);
-        JDBCUtils.executeQuery(QUERY_DELETE, params);
+        JDBCUtils.executeQuery(QUERY_DELETE_CUSTOMER_PURCASE, params);
+    }
+
+    @Override
+    public void deletePurchase(int couponId) throws JDBCException {
+        Map<Integer, Object> params = new HashMap<>();
+        params.put(1, couponId);
+        JDBCUtils.executeQuery(QUERY_DELETE_COUPON_PURCASE, params);
     }
 
     @Override
