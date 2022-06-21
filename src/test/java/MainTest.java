@@ -144,11 +144,11 @@ public class MainTest {
         System.out.println("delete tests");
         AdminFacadeTest.deleteCompany(getCompany4());
         CompanyFacadeTest.deleteCoupon(companyFacade1, getCompany1Coupon1(companyFacade1.getCompanyId()).getId());
-//        AdminFacadeTest.deleteCustomer(getCustomer1().getId());
+        AdminFacadeTest.deleteCustomer(getCustomer2().getId());
 
         System.out.println("---------- DeleteExpiredCoupons ---------");
         DeleteExpiredCoupons deleteExpiredCoupons = new DeleteExpiredCoupons();
-//        new Thread(deleteExpiredCoupons).start();
+        new Thread(deleteExpiredCoupons).start();
 
 
         // simulate program running

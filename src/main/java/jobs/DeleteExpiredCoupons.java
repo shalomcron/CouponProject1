@@ -4,7 +4,7 @@ import dao.coupon.CouponDAO;
 import dao.coupon.CouponDAOImpl;
 
 public class DeleteExpiredCoupons implements Runnable {
-    long MIL_SEC_TO_SLEEP = 2000;// 24 * 60 * 60 * 1000;
+    long MIL_SEC_TO_SLEEP = 24 * 60 * 60 * 1000;
 
     protected static final CouponDAO couponDAO = CouponDAOImpl.getInstance();
     private boolean quit = false;

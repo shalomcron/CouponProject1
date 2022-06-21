@@ -71,9 +71,9 @@ public class AdminFacade extends ClientFacade {
         customerDAO.update(id, customerToUpdate);
     }
 
-    public void deleteCustomer(int id) throws JDBCException {
-        // TODO: DELETE CUSTOMER COUPONS
-        customerDAO.delete(id);
+    public void deleteCustomer(int customerId) throws JDBCException {
+        couponsCustomersDAO.deleteCustomerPurchase(customerId);
+        customerDAO.delete(customerId);
     }
 
     public List<Customer> getAllCustomers() throws JDBCException {
