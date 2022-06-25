@@ -1,4 +1,4 @@
-package facade;
+package app;
 
 import beans.cliens.Customer;
 import beans.coupone.Category;

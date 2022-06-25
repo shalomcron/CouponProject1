@@ -1,11 +1,11 @@
+import app.AdminFacadeTest;
+import app.CompanyFacadeTest;
+import app.CustomerFacadeTest;
 import beans.cliens.Company;
 import beans.cliens.Customer;
 import beans.coupone.Category;
 import beans.coupone.Coupon;
 import db.DatabaseManager;
-import facade.AdminFacadeTest;
-import facade.CompanyFacadeTest;
-import facade.CustomerFacadeTest;
 import facade.clients.AdminFacade;
 import facade.clients.CompanyFacade;
 import facade.clients.CustomerFacade;
@@ -15,7 +15,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class MainTest {
+public class MainCouponApp {
     private static final int AMOUNT_COUPONS = 1;
     private static CompanyFacade companyFacade1, companyFacade2;
     private static CustomerFacade customerFacade1, customerFacade2;
