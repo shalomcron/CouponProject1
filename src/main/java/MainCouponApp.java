@@ -9,7 +9,7 @@ import db.DatabaseManager;
 import facade.clients.AdminFacade;
 import facade.clients.CompanyFacade;
 import facade.clients.CustomerFacade;
-import jobs.DeleteExpiredCoupons;
+import facade.jobs.DeleteExpiredCoupons;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -112,6 +112,7 @@ public class MainCouponApp {
             CompanyFacadeTest.addCoupons(companyFacade2, getCompany2Coupon1(companyId));
             CompanyFacadeTest.addCoupons(companyFacade2, getCompany2Coupon2(companyId));
             CompanyFacadeTest.addCoupons(companyFacade2, getCompany2Coupon3(companyId));
+            CompanyFacadeTest.addCoupons(companyFacade2, getCompany2CouponExpired(companyId));
         }
 
         System.out.println("---------- CustomerFacadeTest - login with customer 1 ---------");
@@ -120,7 +121,7 @@ public class MainCouponApp {
             CustomerFacadeTest.purchaseCoupon(customerFacade1, getCompany1Coupon1(companyFacade1.getCompanyId()));
             CustomerFacadeTest.purchaseCoupon(customerFacade1, getCompany1Coupon2(companyFacade1.getCompanyId()));
             CustomerFacadeTest.purchaseCoupon(customerFacade1, getCompany1Coupon3(companyFacade1.getCompanyId()));
-            System.out.println("get customer 2 Purchases");
+            System.out.println("get customer 1 Purchases");
             CustomerFacadeTest.getPurchasedCoupons(customerFacade1);
             CustomerFacadeTest.getPurchasedCoupons(customerFacade1, Category.Vacation);
         }
@@ -131,6 +132,7 @@ public class MainCouponApp {
             CustomerFacadeTest.purchaseCoupon(customerFacade2, getCompany2Coupon1(companyFacade2.getCompanyId()));
             CustomerFacadeTest.purchaseCoupon(customerFacade2, getCompany2Coupon2(companyFacade2.getCompanyId()));
             CustomerFacadeTest.purchaseCoupon(customerFacade2, getCompany2Coupon3(companyFacade2.getCompanyId()));
+            CustomerFacadeTest.purchaseCoupon(customerFacade2, getCompany2CouponExpired(companyFacade2.getCompanyId()));
             System.out.println("get customer 2 Purchases");
             CustomerFacadeTest.getPurchasedCoupons(customerFacade2);
             CustomerFacadeTest.getPurchasedCoupons(customerFacade2, Category.Vacation);
@@ -206,6 +208,14 @@ public class MainCouponApp {
                 Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plus(1, ChronoUnit.MONTHS)), 1, 15, "image");
     }
 
+    private static Coupon getCompany2CouponExpired(int companyId) {
+        return new Coupon(7, companyId, Category.Vacation.getId(), "Company 2 Expired", "Expired",
+                Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), 1, 15, "image");
+    }
+
+    /**
+     * Companies
+     */
     public static Company getCompany1() {
         return new Company(1, "company1", "company1@gmail.com", "company1_password");
     }
